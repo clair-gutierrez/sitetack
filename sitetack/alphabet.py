@@ -9,13 +9,22 @@ class Alphabet:
                     For example, "ARNDCEQGHILKMFPSTWYV-U"
     """
     str: str
-    length: int = field(init=False)
 
     def __post_init__(self):
         # check that all characters are unique
-        assert len(set(self.str)) == len(self.str), "Alphabet contains duplicate characters"
+        if len(self.str) != len(set(self.str)):
+            raise ValueError("Alphabet must not contain duplicate characters")
+    
+    def __len__(self):
+        """ Return the length of the alphabet """
+        return len(self.str)
 
-        self.length = len(self.str)
+    def __iter__(self):
+        """ Make the alphabet iterable by returning an iterator over the string """
+        return iter(self.str)
+        
+
+
 
 
 

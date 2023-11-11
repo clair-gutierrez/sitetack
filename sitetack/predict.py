@@ -47,6 +47,6 @@ class Predict:
         Returns:
         - A list of one-hot encoded tensors corresponding to the input sequence.
         """
-        depth = len(cls._ALPHABET)
-        return [tf.one_hot(cls._to_indices(item), depth) for item in sequence]
+        depth = len(althabet)
+        return [tf.one_hot(cls.to_indices(item, althabet), depth) for item in sequence]
 

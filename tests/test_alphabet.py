@@ -5,10 +5,10 @@ class TestAlphabet:
     
     def test_alphabet_has_correct_length(self):
         alphabet_str  = "ARNDCEQGHILKMFPSTWYVXZ-U"
-        alphabet = Alphabet(self.alphabet_str)
-        assert alphabet.length == len(alphabet_str)
+        alphabet = Alphabet(alphabet_str)
+        assert len(alphabet) == len(alphabet_str)
     
     def test_alphabet_has_correct_str(self):
         alphabet_str  = "ARNDCEQGHILKMFPSTWYVXZ-U"
         alphabet = Alphabet(alphabet_str)
-        assert alphabet.str == self.alphabet_str
+        assert alphabet.str == alphabet_str

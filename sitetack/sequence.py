@@ -33,6 +33,7 @@ class Sequence:
         return [Kmer.site_to_kmer(self.sequence, s, length) for s in self.get_phosporylation_sites(site)]
     
     def __post_init__(self):
-        # capitalize the sequence
-        self.sequence = self.sequence.upper()
+        """ Verify that sequence is capitalized """
+        if self.sequence != self.sequence.upper():
+            raise ValueError("Sequence must be capitalized")
 
