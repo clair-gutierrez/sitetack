@@ -21,8 +21,8 @@ class TestSequence:
         length = 7
         amino_acid = 'S'
         expected = [
-            Kmer(length=length, site=0, amino_acid=amino_acid, subsequence='---SMAS'), 
-            Kmer(length=length, site=3, amino_acid=amino_acid, subsequence='SMASLEK'), 
-            Kmer(length=length, site=7, amino_acid=amino_acid, subsequence='LEKS---')
+            Kmer(site=0, subsequence='---SMAS'), 
+            Kmer(site=3, subsequence='SMASLEK'), 
+            Kmer(site=7, subsequence='LEKS---')
         ]
         assert self.multiple_s.get_kmers(length, amino_acid) == expected

@@ -14,14 +14,14 @@ if __name__ == "__main__":
     kmer = kmers[0]
     print(f"kmer: {kmer}")
 
-    depth = 24
-    one_hot_kmer = [tf.one_hot(Predict._to_indices(item), depth) for item in kmer.subsequence]
+    alphabet = "ARNDCEQGHILKMFPSTWYVXZ-U"
+    one_hot_kmer = Predict.to_one_hot(kmer, alphabet)
 
     tensor = tf.convert_to_tensor(one_hot_kmer)
     print(f"tensor.shape: {tensor.shape}")
 
 
-    dataset = tf.reshape(tensor, (-1, 35, depth, 1))
+    dataset = tf.reshape(tensor, (-1, 35, len(alphabet), 1))
     print(f"dataset.shape: {dataset.shape}")
 
     new_model = tf.keras.models.load_model(f'cnn.h5')

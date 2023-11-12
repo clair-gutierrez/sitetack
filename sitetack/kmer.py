@@ -8,14 +8,11 @@ class Kmer:
     """ The character used to pad the kmer if it extends past the start or end of the sequence. """
     padding: str = field(default='-', init=False) 
 
-    """ The length of the kmer, must be odd. """
-    length: int 
+    """ The amino acid that kmer is centered about, such as 'S' or 'T'. Must be a single character. """
+    amino_acid: str = field(init=False)
 
     """ The position of the site in the sequence. """
     site: int
-
-    """ The amino acid that kmer is centered about, such as 'S' or 'T'. Must be a single character. """
-    amino_acid: str
 
     """ The kmer sequence, such as 'MTEITAAMVKELRESTGAGMMDCKNALSETNGDFDKAVQLLREKGLGKAAKKADRLAAEG' """
     subsequence: str
@@ -24,17 +21,15 @@ class Kmer:
         """ Checks that 
                 the length is odd
                 the amino acid is in the middle of the subsequence
-                the length of the subsequence is the same as the length of the kmer
         """
-        print(f"Length: {self.length}, Site: {self.site}, Amino Acid: {self.amino_acid}, Subsequence: {self.subsequence}")
-        if self.length % 2 != 1:
-            raise ValueError("Length must be odd")
-        if self.amino_acid != self.subsequence[self.length // 2]:
-            raise ValueError("Amino acid must be in the middle of the subsequence")
-        if len(self.subsequence) != self.length:
-            raise ValueError("Length of subsequence must be the same as the length of the kmer")
-        
+        # Set the amino acid
+        object.__setattr__(self, 'amino_acid', self.subsequence[len(self) // 2])
 
+        if len(self) % 2 != 1:
+            raise ValueError("Length must be odd")
+        if self.amino_acid != self.subsequence[len(self) // 2]:
+            raise ValueError("Amino acid must be in the middle of the subsequence")
+    
 
     @staticmethod
     def site_to_kmer(sequence: str, site: int, length: int) -> 'Kmer':
@@ -58,4 +53,12 @@ class Kmer:
         else: # site is near the middle of the sequence
             subsequence = sequence[site - length // 2:site + length // 2 + 1]
 
-        return Kmer(length=length, site=site, amino_acid=sequence[site], subsequence=subsequence)
+        return Kmer(site=site, subsequence=subsequence)
+
+    def __len__(self):
+        """ The length of the kmer, must be odd. """
+        return len(self.subsequence)
+    
+    def __iter__(self):
+        """ Returns an iterator over the kmer. """
+        return iter(self.subsequence)
