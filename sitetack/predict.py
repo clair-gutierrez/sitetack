@@ -52,7 +52,7 @@ class Predict:
         return [tf.one_hot(Predict.to_indices(item, althabet), depth) for item in kmer]
 
     @staticmethod
-    def on_kmer(kmer: Kmer, alphabet: Alphabet, model_file="cnn.h5") -> float:
+    def on_kmer(kmer: Kmer, alphabet: Alphabet, model_file) -> float:
       """
       Predicts the probability that the amino acid centered in the kmer is a phosphorylation site. 
 

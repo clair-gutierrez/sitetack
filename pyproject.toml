@@ -1,15 +1,16 @@
 [tool.poetry]
 name = "sitetack"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Benjamin Gutierrez <mrbengutierrez@gmail.com>", "Clair Gutierrez <cstg@mit.edu>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.7,<3.11"
+python = ">=3.8,<3.11"
 tensorflow-io-gcs-filesystem = "0.27.0"
-tensorflow = "~2.9.1"
-tqdm = "^4.66.1"
+protobuf = "3.20.0"
+tensorflow = "2.6.0"
+keras = "2.6"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
@@ -22,4 +23,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 filterwarnings = [
     "ignore::DeprecationWarning:flatbuffers.*",
+    "ignore::DeprecationWarning:tensorflow.*",
 ]
