@@ -1,14 +1,15 @@
-# SiteTACK - Sequence Analysis Tool  
+# SiteTACK - Protein Sequence Analysis Tool
 
 ## Overview  
-PTM Predictor is a specialized tool designed to predict post-translational modifications (PTMs) in protein sequences. It leverages machine learning techniques to analyze protein sequences and predict potential sites of modification such as phosphorylation, glycosylation, hydroxylation, and others. This tool aims to assist researchers in understanding and exploring the complex world of protein modifications, which play a crucial role in various biological processes.
+ Utilizing deep learning algorithms, it offers a methodical approach to analyzing protein sequences and identifying potential modification sites, including phosphorylation, glycosylation, and hydroxylation. The tool is developed with a focus on aiding scientific research, providing insights into the role of PTMs in biological functions.
 
 ## Features  
-* Versatile PTM Prediction: Supports multiple PTM types, including phosphorylation, glycosylation, and hydroxyproline, among others.  
-* Sequence Input Compatibility: Accepts protein sequences in .fasta format, making it compatible with standard bioinformatics workflows.  
-* Probability Thresholding: Allows users to specify a cutoff probability, enhancing the precision of PTM site prediction.  
-* Advanced Encoding Techniques: Implements one-hot encoding for efficient representation and processing of protein sequences.  
-* Deep Learning Integration: Utilizes TensorFlow-based neural network models for accurate prediction of PTM sites.  
+- **Comprehensive PTM Prediction**: Equipped to predict various PTM types such as phosphorylation, glycosylation, and hydroxyproline.
+- **Sequence Input Compatibility**: Accepts protein sequences in .fasta format, compatible with standard bioinformatics workflows.
+- **Probability Thresholding**: Allows setting specific probability cutoffs to enhance the precision of PTM site predictions.
+- **Advanced Encoding Techniques**: Employs one-hot encoding for efficient representation and processing of protein sequences.
+- **Integration of Deep Learning Models**: Utilizes TensorFlow-based neural network models for accurate PTM site prediction. 
+
 
 ## Requirements 
 See pyproject.toml
@@ -21,4 +22,4 @@ Install project using poetry
 ```poetry install```
 
 ## License  
-SiteTACK is released under the MIT License.  
+SiteTACK is released under the MIT License.
