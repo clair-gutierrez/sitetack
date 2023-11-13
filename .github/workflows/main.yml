@@ -1,0 +1,18 @@
+name: Example workflow
+
+# This workflow is triggered on every push to the repository.
+on: [push]
+
+jobs:
+  build:
+    # This job runs on the latest Ubuntu version.
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      # This step checks out your repository under $GITHUB_WORKSPACE, so your job can access it.
+      uses: actions/checkout@v2
+
+    - name: Run a one-line script
+      # This step echoes "Hello, World!" to the log.
+      run: echo Hello, World!
