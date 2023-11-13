@@ -24,4 +24,5 @@ RUN useradd -m sitetack
 # This ensures the user has the necessary permissions
 RUN chown -R sitetack:sitetack /sitetack
 
+# Change to sitetack user
 USER sitetack
