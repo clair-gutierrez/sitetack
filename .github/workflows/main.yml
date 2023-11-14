@@ -38,10 +38,10 @@ jobs:
         cache-to: type=local,dest=/tmp/.buildx-cache-new
 
     - name: Run Pytest in Docker Container
-      run: docker run --rm sitetack:latest poetry run pytest
+      run: docker run --rm sitetack:latest pytest
     
     - name: Type test with pyright
-      run: docker run --rm sitetack:latest poetry run pyright
+      run: docker run --rm sitetack:latest pyright
 
     - name: Move Docker cache
       run: |
