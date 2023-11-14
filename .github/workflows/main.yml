@@ -17,10 +17,10 @@ jobs:
         lfs: true
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      uses: docker/setup-buildx-action@v3
 
     - name: Cache Docker layers
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: /tmp/.buildx-cache
         key: ${{ runner.os }}-buildx-${{ github.sha }}
@@ -28,7 +28,7 @@ jobs:
           ${{ runner.os }}-buildx-
 
     - name: Build Docker Image
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
         context: .
         file: Dockerfile
@@ -38,7 +38,10 @@ jobs:
         cache-to: type=local,dest=/tmp/.buildx-cache-new
 
     - name: Run Pytest in Docker Container
-      run: docker run --rm sitetack:latest poetry run pytest
+      run: docker run --rm sitetack:latest pytest
+    
+    - name: Type test with pyright
+      run: docker run --rm sitetack:latest pyright
 
     - name: Move Docker cache
       run: |

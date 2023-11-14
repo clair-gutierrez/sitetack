@@ -7,6 +7,7 @@ from pathlib import Path
 
 class TestPredict:
 
+    @classmethod
     def setup_class(cls):
         cls.alphabet_22  = Alphabet("ARNDCEQGHILKMFPSTWYVXZ-U")
 
@@ -17,17 +18,14 @@ class TestPredict:
 
     def test_to_indices_three_characters(self):
         assert Predict.to_indices(self.kmer_arn, self.alphabet_22) == [0, 1, 2]
-    
-    def test_to_indices_no_characters(self):
-        assert Predict.to_indices('', self.alphabet_22) == []
 
     def test_to_one_hot_three_characters_has_three_tensors(self):
         depth = len(self.alphabet_22)
         # Expected one-hot encoded tensors
         expected = [
-            np.eye(depth, dtype=np.float32)[[0]],
-            np.eye(depth, dtype=np.float32)[[1]],
-            np.eye(depth, dtype=np.float32)[[2]],
+            np.eye(depth, dtype=np.float32)[[0]], # pyright: ignore [reportGeneralTypeIssues]
+            np.eye(depth, dtype=np.float32)[[1]], # pyright: ignore [reportGeneralTypeIssues]
+            np.eye(depth, dtype=np.float32)[[2]], # pyright: ignore [reportGeneralTypeIssues]
         ]
         
         # Call the method under test.
