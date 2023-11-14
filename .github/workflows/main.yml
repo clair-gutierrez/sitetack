@@ -7,9 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  docker-build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -37,13 +36,27 @@ jobs:
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
 
-    - name: Run Pytest in Docker Container
-      run: docker run --rm sitetack:latest poetry run pytest
-    
-    - name: Type test with pyright
-      run: docker run --rm sitetack:latest poetry run pyright
-
     - name: Move Docker cache
       run: |
         rm -rf /tmp/.buildx-cache
         mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+  pytest:
+    needs: docker-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Run Pytest in Docker Container
+        run: docker run --rm sitetack:latest poetry run pytest
+
+  pyright:
+    needs: docker-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Type test with pyright
+        run: docker run --rm sitetack:latest poetry run pyright
+
+
