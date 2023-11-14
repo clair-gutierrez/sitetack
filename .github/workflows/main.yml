@@ -39,6 +39,9 @@ jobs:
 
     - name: Run Pytest in Docker Container
       run: docker run --rm sitetack:latest poetry run pytest
+    
+    - name: Type test with pyright
+      run: docker run --rm sitetack:latest poetry run pyright
 
     - name: Move Docker cache
       run: |
