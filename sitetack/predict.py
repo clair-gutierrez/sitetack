@@ -35,7 +35,7 @@ class Predict:
         return [char_to_int[char] for char in kmer]
     
     @staticmethod
-    def to_one_hot(kmer: Kmer, althabet: Alphabet) -> List[tf.Tensor]:
+    def to_one_hot(kmer: Kmer, alphabet: Alphabet) -> List[tf.Tensor]:
         """
         Convert a kmer into their corresponding one-hot encoded tensors.
         The depth of the one-hot encoding, i.e., the number of unique categories
@@ -48,8 +48,9 @@ class Predict:
         Returns:
         - A list of one-hot encoded tensors corresponding to the input kmer
         """
-        depth = len(althabet)
-        return [tf.one_hot(Predict.to_indices(item, althabet), depth) for item in kmer]
+        depth = len(alphabet)
+        indices = Predict.to_indices(kmer, alphabet)  # Convert entire kmer at once
+        return tf.one_hot(indices, depth)  # Return one-hot encoded tensor for the entire kmer
 
     @staticmethod
     def on_kmer(kmer: Kmer, alphabet: Alphabet, model_file) -> float:

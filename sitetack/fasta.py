@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 from sitetack.sequence import Sequence
 
 
@@ -11,30 +11,22 @@ class Fasta:
     def read_sequences(fasta_file: Path) -> List[Sequence]:
         """
         Read a fasta file and returns a list of Sequences.
-
-        For example, if the fasta file contains:
-        >RNase_1
-        MALEKSLVRLLLLVLILLVLGWVQPSLGKESRAKKFQRQHMDSDSSPSSSSTYCNQMMRR
-        RNMTQGRCKPVNTFVHEPLVDVQNVCFQEKVTCKNGQGNCYKSNSSMHITDCRLTNGSRY
-        PNCAYRTSPKERHIIVACEGSPYVPVHFDASVEDST
-
-        Returns:
-        Sequences([
-            Sequence(uniprot_id='RNase_1', sequence='MALEKSLVRLLLLVLILLVLGWVQPSLGKESRAKKFQRQHMDSDSSPSSSSTYCNQMMRRRNMTQGRCKPVNTFVHEPLVDVQNVCFQEKVTCKNGQGNCYKSNSSMHITDCRLTNGSRYPNCAYRTSPKERHIIVACEGSPYVPVHFDASVEDST')
-        ]
         """
-        sequences = []
+        sequences: List[Sequence] = []  
+        uniprot_id: str = ""  # Initialize uniprot_id as an empty string
+        sequence: str = ""  # Initialize sequence as an empty string
+
         with open(fasta_file) as f:
-            uniprot_id = None
-            sequence = None
             for line in f:
                 if line.startswith('>'):
-                    if uniprot_id is not None:
+                    if uniprot_id:  # Check if uniprot_id is not an empty string
                         sequences.append(Sequence(uniprot_id, sequence))
                     uniprot_id = line[1:].strip()
-                    sequence = ''
+                    sequence = ''  # Reset sequence for the next record
                 else:
-                    sequence += line.strip()
-            if uniprot_id is not None:
+                    sequence += line.strip()  # Concatenate the sequence line
+
+            if uniprot_id:  # Check for the last record
                 sequences.append(Sequence(uniprot_id, sequence))
+
         return sequences
