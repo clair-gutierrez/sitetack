@@ -22,12 +22,10 @@ class TestPredict:
     def test_to_one_hot_three_characters_has_three_tensors(self):
         depth = len(self.alphabet_22)
         # Expected one-hot encoded tensors
-        dtype = "float32"
-        # pyright type ignore: Argument of type "Literal[np.float32]" cannot be assigned to parameter "dtype" of type "type[float]" in function "eye"
         expected = [
-            np.eye(depth, dtype=np.float32)[[0]],
-            np.eye(depth, dtype=np.float32)[[1]],
-            np.eye(depth, dtype=np.float32)[[2]],
+            np.eye(depth, dtype=np.float32)[[0]], # pyright: ignore [reportGeneralTypeIssues]
+            np.eye(depth, dtype=np.float32)[[1]], # pyright: ignore [reportGeneralTypeIssues]
+            np.eye(depth, dtype=np.float32)[[2]], # pyright: ignore [reportGeneralTypeIssues]
         ]
         
         # Call the method under test.
