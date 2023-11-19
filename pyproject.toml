@@ -11,6 +11,9 @@ tensorflow-io-gcs-filesystem = "0.27.0"
 protobuf = "3.20.0"
 tensorflow = "2.6.0"
 keras = "2.6"
+fastapi = "0.9"
+uvicorn = "0.22"
+email-validator = "^2.1.0.post1"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
