@@ -41,18 +41,17 @@ class Kmer:
                 site: The site to kmer is centered about, such as 'S' or 'T'. Must be a single character.
                 length: The length of the kmer, must be odd 
         """
-        subsequence = ""
-        if length // 2 > site: # site is too close to the start of the sequence
-            subsequence = sequence[:site + length // 2 + 1]
-            subsequence = Kmer.padding * (length // 2 - site) + subsequence
+        left_padding =  max(0, length // 2 - site)
+        right_padding = max(0, length // 2 + site - len(sequence) + 1)
 
-        elif length // 2 + site > len(sequence): # site is too close to the end of the sequence
-            subsequence = sequence[site - length // 2:]
-            subsequence = subsequence + Kmer.padding * (length // 2 + site - len(sequence) + 1)
-            
-        else: # site is near the middle of the sequence
+        if left_padding > 0 and right_padding > 0:
+            subsequence = Kmer.padding * left_padding + sequence + Kmer.padding * right_padding
+        elif left_padding > 0:
+            subsequence = Kmer.padding * left_padding + sequence[:site + length // 2 + 1]
+        elif right_padding > 0:
+            subsequence = sequence[site - length // 2:] + Kmer.padding * right_padding
+        else:
             subsequence = sequence[site - length // 2:site + length // 2 + 1]
-
         return Kmer(site=site, subsequence=subsequence)
 
     def __len__(self):

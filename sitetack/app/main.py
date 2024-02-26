@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, validator
-from sitetack.app.ptm_kind import PtmKind
+from sitetack.app.enums import PtmKind
 
 class RequestModel(BaseModel):
     model_name: str
@@ -22,7 +22,7 @@ class RequestModel(BaseModel):
 
     @validator('ptms')
     def ptm_must_exist_in_ptm_kind(cls, v):
-        ptm_kinds = [ptm.name for ptm in PtmKind]
+        ptm_kinds = [ptm.value.name for ptm in PtmKind]
         for ptm in v:
             if ptm not in ptm_kinds:
                 raise ValueError(f'{ptm} is not a valid PTM')

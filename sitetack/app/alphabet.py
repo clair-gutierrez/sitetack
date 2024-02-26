@@ -22,6 +22,8 @@ class Alphabet:
     def __iter__(self):
         """ Make the alphabet iterable by returning an iterator over the string """
         return iter(self.str)
+    
+
         
 
 

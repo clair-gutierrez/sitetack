@@ -14,6 +14,8 @@ keras = "2.6"
 fastapi = "0.9"
 uvicorn = "0.22"
 email-validator = "^2.1.0.post1"
+pandas = "1.2.0"
+openpyxl = "^3.1.2"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
@@ -28,5 +30,6 @@ build-backend = "poetry.core.masonry.api"
 filterwarnings = [
     "ignore::DeprecationWarning:flatbuffers.*",
     "ignore::DeprecationWarning:tensorflow.*",
+    "ignore:distutils Version classes are deprecated. Use packaging.version instead.",
 ]
 

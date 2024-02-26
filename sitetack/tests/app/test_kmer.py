@@ -32,6 +32,30 @@ class TestKmer:
         expected = Kmer(site=site, subsequence="IJK--")
         actual = Kmer.site_to_kmer(sequence, site, length)
         assert expected == actual
+    
+    def test_site_to_kmer_equal_padding_on_both_sides(self):
+        sequence = "AKA"
+        site = 1 # K
+        length = 7
+        expected = Kmer(site=site, subsequence="--AKA--")
+        actual = Kmer.site_to_kmer(sequence, site, length)
+        assert expected == actual
+    
+    def test_site_to_kmer_more_padding_on_left_side(self):
+        sequence = "AKB"
+        site = 0 # A
+        length = 7
+        expected = Kmer(site=site, subsequence="---AKB-")
+        actual = Kmer.site_to_kmer(sequence, site, length)
+        assert expected == actual
+    
+    def test_site_to_kmer_more_padding_on_right_side(self):
+        sequence = "AKB"
+        site = 2 # B
+        length = 7
+        expected = Kmer(site=site, subsequence="-AKB---")
+        actual = Kmer.site_to_kmer(sequence, site, length)
+        assert expected == actual
 
     def test_site_to_kmer_site_in_back_has_correct_amino_acid(self):
         sequence = "ABCDEFGHIJK"
