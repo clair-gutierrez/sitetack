@@ -1,4 +1,4 @@
-import importlib
+import importlib.util
 from pathlib import Path
 from typing import List
 import tensorflow as tf
@@ -25,7 +25,9 @@ class TestModelDirectory:
                 Path: The directory of the module.
         """
         spec = importlib.util.find_spec(module)
-        return Path(spec.origin).parent
+        if spec is not None and spec.origin is not None:
+            return Path(spec.origin).parent
+        raise ValueError(f"Module {module} not found")
 
     @classmethod
     def get_all_valid_h5_files(cls) -> List[Path]:

@@ -27,7 +27,7 @@ class Predict:
       return [char_to_int[char] for char in kmer.subsequence]
 
     @staticmethod
-    def _tensor_encoding(kmers: List[Kmer], alphabet: str) -> np.ndarray:
+    def _tensor_encoding(kmers: List[Kmer], alphabet: Alphabet) -> np.ndarray:
       """
       Encodes a list of kmers into a np.ndarray of one-hot encoded tensors.
       
@@ -42,7 +42,7 @@ class Predict:
       return np.stack(indices, axis=0)
 
     @staticmethod
-    def on_kmer(kmers: List[Kmer], alphabet: Alphabet, model_file) -> float:
+    def on_kmer(kmers: List[Kmer], alphabet: Alphabet, model_file) -> np.ndarray:
       """
       Predicts the probability that the amino acid centered in the kmer is a phosphorylation site. 
 
@@ -51,7 +51,8 @@ class Predict:
           alphabet: The alphabet used to encode the kmer.
         
       Returns:
-        A probability in the range [0, 1]
+          A np.ndarray of probabilities, one for each kmer,
+          e.g. [0.1, 0.9]
       """        
       tensor = Predict._tensor_encoding(kmers, alphabet)
       model = tf.keras.models.load_model(model_file)

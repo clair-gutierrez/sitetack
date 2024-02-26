@@ -3,15 +3,12 @@
 from sitetack.app.enums import PtmKind, OrganismKind, LabelKind
 from sitetack.app.alphabet import Alphabet
 from pathlib import Path
-import importlib
+import importlib.util
 import pandas
 
 
 class Model:
     """ Given a set of PTM, organism and label, this class represents a model """
-
-
-
 
     def __init__(self, ptm: PtmKind, organism: OrganismKind, label: LabelKind):
         """
@@ -47,7 +44,10 @@ class Model:
                 Path: The directory of the module.
         """
         spec = importlib.util.find_spec(module)
-        return Path(spec.origin).parent
+        if spec is not None and spec.origin is not None:
+            return Path(spec.origin).parent
+        raise ValueError(f"Module {module} not found")
+        
 
     @classmethod
     def get_h5_file(cls, ptm: PtmKind, organism: OrganismKind, label: LabelKind) -> Path:

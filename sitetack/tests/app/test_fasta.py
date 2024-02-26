@@ -1,4 +1,4 @@
-import importlib
+import importlib.resources
 from pathlib import Path
 from sitetack.app.fasta import Fasta
 from sitetack.app.sequence import Sequence
