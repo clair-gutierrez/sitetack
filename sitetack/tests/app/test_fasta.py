@@ -24,22 +24,54 @@ class TestFasta:
             Sequence(uniprot_id='RNase_2', sequence='MVPKLFTSQICLLLLLGLLAVEGSLHVKPPQFTWAQWFETQHINMTSQQCTNAMQVINNYQRRCKNQNTFLLTTFANVVNVCGNPNMTCPSNKTRKNCHHSGSQVPLIHCNLTTPSPQNISNCRYAQTPANMFYIVACDNRDQRRDPPQYPVVPVHLDRII')
         ]
     
-    def test_read_sequences_returns_two_sequences_when_two_sequences(self):
-        sequences = Fasta.read_sequences(self.two_sequences_path)
+    def test_read_sequences_from_file_returns_two_sequences_when_two_sequences(self):
+        sequences = Fasta.read_sequences_from_file(self.two_sequences_path)
         assert len(sequences) == 2
 
-    def test_read_sequences_correct_sequences_when_two_sequences(self):
-        sequences = Fasta.read_sequences(self.two_sequences_path)
+    def test_read_sequences_from_file_correct_sequences_when_two_sequences(self):
+        sequences = Fasta.read_sequences_from_file(self.two_sequences_path)
         assert set(sequences) == set(self.two_sequences_sequences)
 
-    def test_read_sequences_returns_one_sequence_when_one_sequence(self):
-        sequences = Fasta.read_sequences(self.one_sequence_path)
+    def test_read_sequences_from_file_returns_one_sequence_when_one_sequence(self):
+        sequences = Fasta.read_sequences_from_file(self.one_sequence_path)
         assert len(sequences) == 1
 
-    def test_read_sequences_correct_sequence_when_one_sequence(self):
-        sequences = Fasta.read_sequences(self.one_sequence_path)
+    def test_read_sequences_from_file_correct_sequence_when_one_sequence(self):
+        sequences = Fasta.read_sequences_from_file(self.one_sequence_path)
         assert set(sequences) == set(self.one_sequences_sequences)
     
-    def test_read_sequences_returns_empty_list_when_empty_file(self):
-        sequences = Fasta.read_sequences(self.empty_path)
+    def test_read_sequences_from_file_returns_empty_list_when_empty_file(self):
+        sequences = Fasta.read_sequences_from_file(self.empty_path)
         assert sequences == []
+
+    def test_read_sequences_from_text_returns_two_sequences_when_two_sequences(self):
+        with open(self.two_sequences_path, 'r') as f:
+            text = f.read()
+        sequences = Fasta.read_sequences_from_text(text)
+        assert len(sequences) == 2
+
+    def test_read_sequences_from_text_correct_sequences_when_two_sequences(self):
+        with open(self.two_sequences_path, 'r') as f:
+            text = f.read()
+        sequences = Fasta.read_sequences_from_text(text)
+        assert set(sequences) == set(self.two_sequences_sequences)
+
+    def test_read_sequences_from_text_returns_one_sequence_when_one_sequence(self):
+        with open(self.one_sequence_path, 'r') as f:
+            text = f.read()
+        sequences = Fasta.read_sequences_from_text(text)
+        assert len(sequences) == 1
+
+    def test_read_sequences_from_text_correct_sequence_when_one_sequence(self):
+        with open(self.one_sequence_path, 'r') as f:
+            text = f.read()
+        sequences = Fasta.read_sequences_from_text(text)
+        assert set(sequences) == set(self.one_sequences_sequences)
+
+    def test_read_sequences_from_text_returns_empty_list_when_empty_text(self):
+        with open(self.empty_path, 'r') as f:
+            text = f.read()
+        sequences = Fasta.read_sequences_from_text(text)
+        assert sequences == []
+
+    
