@@ -8,7 +8,7 @@ WORKDIR /sitetack
 COPY . .
 
 # Install poetry and dependencies
-RUN python3 -m pip install poetry && \
+RUN pip3 install poetry && \
     # Config poetry to not create virtualenvs
     poetry config virtualenvs.create false && \
     # Install dependencies
