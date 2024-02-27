@@ -1,5 +1,5 @@
 import numpy as np
-from typing import List, Tuple
+from typing import List
 import tensorflow as tf
 
 from sitetack.app.alphabet import Alphabet

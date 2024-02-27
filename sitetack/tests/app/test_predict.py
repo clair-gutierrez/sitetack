@@ -1,10 +1,6 @@
-import importlib
-import tensorflow as tf
-import numpy as np
 from sitetack.app.alphabet import Alphabet
 from sitetack.app.kmer import Kmer
 from sitetack.app.predict import Predict
-from pathlib import Path
 from sitetack.app.enums import PtmKind, OrganismKind, LabelKind
 from sitetack.app.model import Model
 
