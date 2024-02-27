@@ -1,9 +1,6 @@
 name: Type Checker
 
-on:
-  push:
-    paths:
-      - '*.py'
+on: [pull_request]
 
 jobs:
   mypy:
