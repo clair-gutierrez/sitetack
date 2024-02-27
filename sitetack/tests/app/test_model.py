@@ -68,7 +68,7 @@ class TestModel:
         for probability in probabilities:
             assert 0 <= probability <= 1
             
-    @pytest.mark.parametrize("ptm, organism, label", product(PtmKind, OrganismKind, LabelKind))
+    @pytest.mark.parametrize("ptm, organism, label", list(product(PtmKind, OrganismKind, LabelKind)))
     def test_get_alphabet_get_h5_file_all_can_be_predicted(self, ptm, organism, label):
         h5_file = Model.get_h5_file(ptm, organism, label)
         alphabet = Model.get_alphabet(ptm, organism, label)
