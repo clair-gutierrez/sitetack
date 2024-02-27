@@ -4,10 +4,10 @@ from sitetack.app.predict import Predict
 from sitetack.app.enums import PtmKind, OrganismKind, LabelKind
 from sitetack.app.model import Model
 
-class TestPredict:
 
+class TestPredict:
     def test_to_one_hot_three_characters_has_three_tensors(self):
-        alphabet_22  = Alphabet("ARNDCEQGHILKMFPSTWYVXZ-U")
+        alphabet_22 = Alphabet("ARNDCEQGHILKMFPSTWYVXZ-U")
         kmer_arn = Kmer(site=42, subsequence="ARN")
         result = Predict.to_one_hot(kmer_arn, alphabet_22)
         assert result == [0, 1, 2]
@@ -33,4 +33,3 @@ class TestPredict:
 
         for probability in probabilities:
             assert 0 <= probability <= 1
-    
