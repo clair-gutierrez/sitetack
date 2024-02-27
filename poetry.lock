@@ -285,13 +285,13 @@ css = ["tinycss2 (>=1.1.0,<1.3)"]
 
 [[package]]
 name = "cachetools"
-version = "5.3.2"
+version = "5.3.3"
 description = "Extensible memoizing collections and decorators"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "cachetools-5.3.2-py3-none-any.whl", hash = "sha256:861f35a13a451f94e301ce2bec7cac63e881232ccce7ed67fab9b5df4d3beaa1"},
-    {file = "cachetools-5.3.2.tar.gz", hash = "sha256:086ee420196f7b2ab9ca2db2520aca326318b68fe5ba8bc4d49cca91add450f2"},
+    {file = "cachetools-5.3.3-py3-none-any.whl", hash = "sha256:0abad1021d3f8325b2fc1d2e9c8b9c9d57b04c3932657a72465447332c24d945"},
+    {file = "cachetools-5.3.3.tar.gz", hash = "sha256:ba29e2dfa0b8b556606f097407ed1aa62080ee108ab0dc5ec9d6a723a007d105"},
 ]
 
 [[package]]
@@ -596,13 +596,13 @@ wmi = ["wmi (>=1.5.1)"]
 
 [[package]]
 name = "email-validator"
-version = "2.1.0.post1"
+version = "2.1.1"
 description = "A robust email address syntax and deliverability validation library."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "email_validator-2.1.0.post1-py3-none-any.whl", hash = "sha256:c973053efbeddfef924dc0bd93f6e77a1ea7ee0fce935aea7103c7a3d6d2d637"},
-    {file = "email_validator-2.1.0.post1.tar.gz", hash = "sha256:a4b0bd1cf55f073b924258d19321b1f3aa74b4b5a71a42c305575dba920e1a44"},
+    {file = "email_validator-2.1.1-py3-none-any.whl", hash = "sha256:97d882d174e2a65732fb43bfce81a3a834cbc1bde8bf419e30ef5ea976370a05"},
+    {file = "email_validator-2.1.1.tar.gz", hash = "sha256:200a70680ba08904be6d1eef729205cc0d687634399a5924d842533efb824b84"},
 ]
 
 [package.dependencies]
@@ -983,13 +983,13 @@ files = [
 
 [[package]]
 name = "ipykernel"
-version = "6.29.2"
+version = "6.29.3"
 description = "IPython Kernel for Jupyter"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "ipykernel-6.29.2-py3-none-any.whl", hash = "sha256:50384f5c577a260a1d53f1f59a828c7266d321c9b7d00d345693783f66616055"},
-    {file = "ipykernel-6.29.2.tar.gz", hash = "sha256:3bade28004e3ff624ed57974948116670604ac5f676d12339693f3142176d3f0"},
+    {file = "ipykernel-6.29.3-py3-none-any.whl", hash = "sha256:5aa086a4175b0229d4eca211e181fb473ea78ffd9869af36ba7694c947302a21"},
+    {file = "ipykernel-6.29.3.tar.gz", hash = "sha256:e14c250d1f9ea3989490225cc1a542781b095a18a19447fcf2b5eaf7d0ac5bd2"},
 ]
 
 [package.dependencies]
@@ -1012,7 +1012,7 @@ cov = ["coverage[toml]", "curio", "matplotlib", "pytest-cov", "trio"]
 docs = ["myst-parser", "pydata-sphinx-theme", "sphinx", "sphinx-autodoc-typehints", "sphinxcontrib-github-alt", "sphinxcontrib-spelling", "trio"]
 pyqt5 = ["pyqt5"]
 pyside6 = ["pyside6"]
-test = ["flaky", "ipyparallel", "pre-commit", "pytest (>=7.0)", "pytest-asyncio (==0.23.4)", "pytest-cov", "pytest-timeout"]
+test = ["flaky", "ipyparallel", "pre-commit", "pytest (>=7.0)", "pytest-asyncio (>=0.23.5)", "pytest-cov", "pytest-timeout"]
 
 [[package]]
 name = "ipython"
@@ -1309,13 +1309,13 @@ test = ["click", "pre-commit", "pytest (>=7.0)", "pytest-asyncio (>=0.19.0)", "p
 
 [[package]]
 name = "jupyter-lsp"
-version = "2.2.2"
+version = "2.2.3"
 description = "Multi-Language Server WebSocket proxy for Jupyter Notebook/Lab server"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "jupyter-lsp-2.2.2.tar.gz", hash = "sha256:256d24620542ae4bba04a50fc1f6ffe208093a07d8e697fea0a8d1b8ca1b7e5b"},
-    {file = "jupyter_lsp-2.2.2-py3-none-any.whl", hash = "sha256:3b95229e4168355a8c91928057c1621ac3510ba98b2a925e82ebd77f078b1aa5"},
+    {file = "jupyter-lsp-2.2.3.tar.gz", hash = "sha256:33dbcbc5df24237ff5c8b696b04ff4689fcd316cb8d4957d620fe5504d7d2c3f"},
+    {file = "jupyter_lsp-2.2.3-py3-none-any.whl", hash = "sha256:57dd90d0a2e2530831793550846168c81c952b49e187aa339e455027a5f0fd2e"},
 ]
 
 [package.dependencies]
@@ -2267,17 +2267,17 @@ files = [
 
 [[package]]
 name = "pywinpty"
-version = "2.0.12"
+version = "2.0.13"
 description = "Pseudo terminal support for Windows from Python."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pywinpty-2.0.12-cp310-none-win_amd64.whl", hash = "sha256:21319cd1d7c8844fb2c970fb3a55a3db5543f112ff9cfcd623746b9c47501575"},
-    {file = "pywinpty-2.0.12-cp311-none-win_amd64.whl", hash = "sha256:853985a8f48f4731a716653170cd735da36ffbdc79dcb4c7b7140bce11d8c722"},
-    {file = "pywinpty-2.0.12-cp312-none-win_amd64.whl", hash = "sha256:1617b729999eb6713590e17665052b1a6ae0ad76ee31e60b444147c5b6a35dca"},
-    {file = "pywinpty-2.0.12-cp38-none-win_amd64.whl", hash = "sha256:189380469ca143d06e19e19ff3fba0fcefe8b4a8cc942140a6b863aed7eebb2d"},
-    {file = "pywinpty-2.0.12-cp39-none-win_amd64.whl", hash = "sha256:7520575b6546db23e693cbd865db2764097bd6d4ef5dc18c92555904cd62c3d4"},
-    {file = "pywinpty-2.0.12.tar.gz", hash = "sha256:8197de460ae8ebb7f5d1701dfa1b5df45b157bb832e92acba316305e18ca00dd"},
+    {file = "pywinpty-2.0.13-cp310-none-win_amd64.whl", hash = "sha256:697bff211fb5a6508fee2dc6ff174ce03f34a9a233df9d8b5fe9c8ce4d5eaf56"},
+    {file = "pywinpty-2.0.13-cp311-none-win_amd64.whl", hash = "sha256:b96fb14698db1284db84ca38c79f15b4cfdc3172065b5137383910567591fa99"},
+    {file = "pywinpty-2.0.13-cp312-none-win_amd64.whl", hash = "sha256:2fd876b82ca750bb1333236ce98488c1be96b08f4f7647cfdf4129dfad83c2d4"},
+    {file = "pywinpty-2.0.13-cp38-none-win_amd64.whl", hash = "sha256:61d420c2116c0212808d31625611b51caf621fe67f8a6377e2e8b617ea1c1f7d"},
+    {file = "pywinpty-2.0.13-cp39-none-win_amd64.whl", hash = "sha256:71cb613a9ee24174730ac7ae439fd179ca34ccb8c5349e8d7b72ab5dea2c6f4b"},
+    {file = "pywinpty-2.0.13.tar.gz", hash = "sha256:c34e32351a3313ddd0d7da23d27f835c860d32fe4ac814d372a3ea9594f41dde"},
 ]
 
 [[package]]
