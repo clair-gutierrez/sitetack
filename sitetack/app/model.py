@@ -27,12 +27,12 @@ class Model:
     @classmethod
     def model_directory_path(cls):
         """ Get the path to the models directory."""
-        return cls.get_directory_from_module('sitetack.models')
-    
+        return cls.get_directory_from_module("sitetack.models")
+
     @classmethod
     def master_file_path(cls):
         """ Get the path to the master file, which contains ptm, organism and label, and alphabet information."""
-        return cls.model_directory_path() / 'master_info.xlsx'
+        return cls.model_directory_path() / "master_info.xlsx"
 
     @staticmethod
     def get_directory_from_module(module: str) -> Path:
@@ -47,10 +47,11 @@ class Model:
         if spec is not None and spec.origin is not None:
             return Path(spec.origin).parent
         raise ValueError(f"Module {module} not found")
-        
 
     @classmethod
-    def get_h5_file(cls, ptm: PtmKind, organism: OrganismKind, label: LabelKind) -> Path:
+    def get_h5_file(
+        cls, ptm: PtmKind, organism: OrganismKind, label: LabelKind
+    ) -> Path:
         """ Get the h5 file for a given PTM, organism and label.
 
             Parameters:
@@ -60,16 +61,20 @@ class Model:
         """
         ptm_directory_name = ptm.value.directory_name
         organism_directory_name = organism.value.directory_name
-        organism_directory = cls.model_directory_path() / ptm_directory_name / organism_directory_name
-        h5_files = list(organism_directory.glob('*.h5'))
+        organism_directory = (
+            cls.model_directory_path() / ptm_directory_name / organism_directory_name
+        )
+        h5_files = list(organism_directory.glob("*.h5"))
         label_query = label.value.filename_query
         for h5_file in h5_files:
             if label_query in h5_file.name:
                 return h5_file
         raise FileNotFoundError(f"No h5 file found for {ptm}, {organism}, {label}")
-    
+
     @classmethod
-    def get_alphabet(cls, ptm: PtmKind, organism: OrganismKind, label: LabelKind) -> Alphabet:
+    def get_alphabet(
+        cls, ptm: PtmKind, organism: OrganismKind, label: LabelKind
+    ) -> Alphabet:
         """ Get the alphabet for a given PTM, organism and label.
 
             Parameters:
@@ -81,25 +86,20 @@ class Model:
         """
         df = pandas.read_excel(cls.master_file_path())
         dataset_df = df[df["Dataset"] == "Musite Deep"]
-        ptm_df = dataset_df[dataset_df['PTM'] == ptm.value.directory_name]
-        organism_df = ptm_df[ptm_df['Organism'] == organism.value.directory_name]
-        
+        ptm_df = dataset_df[dataset_df["PTM"] == ptm.value.directory_name]
+        organism_df = ptm_df[ptm_df["Organism"] == organism.value.directory_name]
+
         # organism_df should have only one row
         if len(organism_df) != 1:
-            raise RuntimeError(f"Expected one row for {ptm}, {organism}, {label} but got {len(organism_df)}")
-        
+            raise RuntimeError(
+                f"Expected one row for {ptm}, {organism}, {label} but got {len(organism_df)}"
+            )
+
         if label == LabelKind.NO_LABELS:
-            alphabet = organism_df['Alphabet no labels'].values[0]
+            alphabet = organism_df["Alphabet no labels"].values[0]
         elif label == LabelKind.WITH_LABELS:
-            alphabet = organism_df['Alphabet labels'].values[0]
+            alphabet = organism_df["Alphabet labels"].values[0]
         else:
             raise ValueError(f"Unknown label {label}")
-        
+
         return Alphabet(str=alphabet)
-
-
-
-
-
-
-

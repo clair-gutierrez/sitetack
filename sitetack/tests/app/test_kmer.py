@@ -1,7 +1,7 @@
-from sitetack.app.kmer import Kmer    
+from sitetack.app.kmer import Kmer
+
 
 class TestKmer:
-
     def test_site_to_kmer_site_in_middle_generates_correctly(self):
         sequence = "ABCDEFGHIJK"
         site = 5
@@ -32,26 +32,26 @@ class TestKmer:
         expected = Kmer(site=site, subsequence="IJK--")
         actual = Kmer.site_to_kmer(sequence, site, length)
         assert expected == actual
-    
+
     def test_site_to_kmer_equal_padding_on_both_sides(self):
         sequence = "AKA"
-        site = 1 # K
+        site = 1  # K
         length = 7
         expected = Kmer(site=site, subsequence="--AKA--")
         actual = Kmer.site_to_kmer(sequence, site, length)
         assert expected == actual
-    
+
     def test_site_to_kmer_more_padding_on_left_side(self):
         sequence = "AKB"
-        site = 0 # A
+        site = 0  # A
         length = 7
         expected = Kmer(site=site, subsequence="---AKB-")
         actual = Kmer.site_to_kmer(sequence, site, length)
         assert expected == actual
-    
+
     def test_site_to_kmer_more_padding_on_right_side(self):
         sequence = "AKB"
-        site = 2 # B
+        site = 2  # B
         length = 7
         expected = Kmer(site=site, subsequence="-AKB---")
         actual = Kmer.site_to_kmer(sequence, site, length)

@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from sitetack.app.kmer import Kmer
 
 
-
 @dataclass(frozen=True)
 class Sequence:
     """ Represents a sequence in a fasta file."""
@@ -21,7 +20,7 @@ class Sequence:
                 amino_acid: The amino_acid to find, such as 'S' or 'T'. Must be a single character.
         """
         return [i for i, char in enumerate(self.sequence) if char == amino_acid]
-    
+
     def get_kmers(self, length: int, site: str) -> List[Kmer]:
         """ Returns a list of kmers of length k around the given site
             Pads with '-' if the kmer is extends past the start or end of the sequence.
@@ -30,10 +29,12 @@ class Sequence:
                 length: The length of the kmer, must be odd
                 site: The site to kmer is centered about, such as 'S' or 'T'. Must be a single character.
         """
-        return [Kmer.site_to_kmer(self.sequence, s, length) for s in self.get_phosporylation_sites(site)]
-    
+        return [
+            Kmer.site_to_kmer(self.sequence, s, length)
+            for s in self.get_phosporylation_sites(site)
+        ]
+
     def __post_init__(self):
         """ Verify that sequence is capitalized """
         if self.sequence != self.sequence.upper():
             raise ValueError("Sequence must be capitalized")
-
