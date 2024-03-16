@@ -45,11 +45,11 @@ class TestPredict:
 
         kmer_length = 53
         sequence_1 = "MTM"
-        site_1 = 1
+        site_1 = 2
         kmer_1 = Kmer.site_to_kmer(sequence_1, site_1, kmer_length)
 
         sequence_2 = "TMM"
-        site_2 = 0
+        site_2 = 1
         kmer_2 = Kmer.site_to_kmer(sequence_2, site_2, kmer_length)
 
         kmers = [kmer_1, kmer_2]
@@ -113,9 +113,9 @@ class TestSequencePredictions:
             sequence_name='sequence_name', 
             sequence='STAAS',
             site_predictions=[
-                SitePrediction(site=0, amino_acid='S', probability=0.2366819679737091), 
-                SitePrediction(site=4, amino_acid='S', probability=0.3237350881099701), 
-                SitePrediction(site=1, amino_acid='T', probability=0.1932818591594696),
+                SitePrediction(site=1, amino_acid='S', probability=0.2366819679737091), 
+                SitePrediction(site=5, amino_acid='S', probability=0.3237350881099701), 
+                SitePrediction(site=2, amino_acid='T', probability=0.1932818591594696),
             ])
         sequence_predictions = SequencePredictions([sequence_prediction])
 
@@ -125,9 +125,9 @@ class TestSequencePredictions:
                     'sequence_name': 'sequence_name',
                     'sequence': 'STAAS',
                     'site_predictions': [
-                        {'site': 0, 'amino_acid': 'S', 'probability': 0.2366819679737091},
-                        {'site': 4, 'amino_acid': 'S', 'probability': 0.3237350881099701},
-                        {'site': 1, 'amino_acid': 'T', 'probability': 0.1932818591594696}
+                        {'site': 1, 'amino_acid': 'S', 'probability': 0.2366819679737091},
+                        {'site': 5, 'amino_acid': 'S', 'probability': 0.3237350881099701},
+                        {'site': 2, 'amino_acid': 'T', 'probability': 0.1932818591594696}
                     ]
                 }
             ]

@@ -126,7 +126,7 @@ function highlightSequence(sequence, sitePredictions, threshold) {
     sitePredictions.forEach(site => {
         if (site.probability > threshold) {
             // Wrap the character in a span with a style for highlighting
-            sequenceChars[site.site] = `<span style="background-color: orange;">${sequenceChars[site.site]}</span>`;
+            sequenceChars[site.site - 1] = `<span style="background-color: orange;">${sequenceChars[site.site - 1]}</span>`;
         }
     });
     // Join the characters back into a string and return

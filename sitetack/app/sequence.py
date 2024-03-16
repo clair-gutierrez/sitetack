@@ -20,7 +20,7 @@ class Sequence:
             Parameters:
                 amino_acid: The amino_acid to find, such as 'S' or 'T'. Must be a single character.
         """
-        return [i for i, char in enumerate(self.sequence) if char == amino_acid]
+        return [i + 1 for i, char in enumerate(self.sequence) if char == amino_acid]
     
     def get_kmers(self, length: int, amino_acid: str) -> List[Kmer]:
         """ Returns a list of kmers of length k around the given site
