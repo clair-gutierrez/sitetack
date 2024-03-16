@@ -26,3 +26,6 @@ RUN chown -R sitetack:sitetack /sitetack
 
 # Change to sitetack user
 USER sitetack
+
+# docker run -it -d -p 8100:8100 -v ${pwd}:/sitetack --name sitetack-port python:3.8-slim-buster bash
+# uvicorn sitetack.app.main:app --reload --host 0.0.0.0 --port 8100

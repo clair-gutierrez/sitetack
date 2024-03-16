@@ -9,7 +9,7 @@ class Sequence:
     """ Represents a sequence in a fasta file."""
 
     """ UniProtID, such as 'RNase_1' """
-    uniprot_id: str
+    sequence_name: str
 
     """ The sequence, such as 'MTEITAAMVKELRESTGAGMMDCKNALSETNGDFDKAVQLLREKGLGKAAKKADRLAAEG' """
     sequence: str
@@ -22,15 +22,15 @@ class Sequence:
         """
         return [i for i, char in enumerate(self.sequence) if char == amino_acid]
     
-    def get_kmers(self, length: int, site: str) -> List[Kmer]:
+    def get_kmers(self, length: int, amino_acid: str) -> List[Kmer]:
         """ Returns a list of kmers of length k around the given site
             Pads with '-' if the kmer is extends past the start or end of the sequence.
 
             Parameters:
                 length: The length of the kmer, must be odd
-                site: The site to kmer is centered about, such as 'S' or 'T'. Must be a single character.
+                amino_acid: The site to kmer is centered about, such as 'S' or 'T'. Must be a single character.
         """
-        return [Kmer.site_to_kmer(self.sequence, s, length) for s in self.get_phosporylation_sites(site)]
+        return [Kmer.site_to_kmer(self.sequence, s, length) for s in self.get_phosporylation_sites(amino_acid)]
     
     def __post_init__(self):
         """ Verify that sequence is capitalized """

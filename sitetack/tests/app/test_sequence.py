@@ -5,8 +5,8 @@ class TestSequence:
     
     @classmethod
     def setup_class(cls):
-        cls.multiple_s = Sequence(uniprot_id='RNase_1', sequence='SMASLEKS')
-        cls.no_s = Sequence(uniprot_id='RNase_1', sequence='MALEK')
+        cls.multiple_s = Sequence(sequence_name='RNase_1', sequence='SMASLEKS')
+        cls.no_s = Sequence(sequence_name='RNase_1', sequence='MALEK')
     
     def test_get_phosporylation_sites_returns_empty_array_when_no_sites(self):
         assert len(self.no_s.get_phosporylation_sites('S')) == 0
