@@ -47,6 +47,11 @@ class PtmKind(Enum):
     Each member of the enum represents a distinct type of PTM, which are critical for understanding 
     the functional modifications and regulatory mechanisms affecting proteins.
     """
+    PHOSPHORYLATION_ST = PtmKindMetadata(
+        name="Phosphorylation (S,T)",
+        amino_acids=["S", "T"],
+        description="Phosphorylation is the addition of a phosphate group to the amino acids serine and threonine, which is important for protein function and regulation.",
+    )
     HYDROXYLYSINE_K = PtmKindMetadata(
         name="Hydroxylysine (K)",
         amino_acids=["K"],
@@ -81,11 +86,6 @@ class PtmKind(Enum):
         name="O-linked glycosylation (S,T)",
         amino_acids=["S", "T"],
         description="O-linked glycosylation is the attachment of sugar molecules to the amino acids serine and threonine, which is important for protein folding and stability.",
-    )
-    PHOSPHORYLATION_ST = PtmKindMetadata(
-        name="Phosphorylation (S,T)",
-        amino_acids=["S", "T"],
-        description="Phosphorylation is the addition of a phosphate group to the amino acids serine and threonine, which is important for protein function and regulation.",
     )
     PHOSPHORYLATION_Y = PtmKindMetadata(
         name="Phosphorylation (Y)",

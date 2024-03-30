@@ -39,15 +39,44 @@ function submitData() {
     });
 }
 
-// Add this function to display error messages
+function loadExample() {
+    const fastaExample = `>RNase_1
+MALEKSLVRLLLLVLILLVLGWVQPSLGKESRAKKFQRQHMDSDSSPSSSSTYCNQMMRR
+RNMTQGRCKPVNTFVHEPLVDVQNVCFQEKVTCKNGQGNCYKSNSSMHITDCRLTNGSRY
+PNCAYRTSPKERHIIVACEGSPYVPVHFDASVEDST`;
+    document.getElementById('text').value = fastaExample;
+}
+
+
 function displayErrorMessage(error) {
-    // Assuming you want to display the message inside the results <pre> element
     let errorMessage = "An error occurred.";
     if (error.detail && error.detail.length > 0) {
-        // Construct a more detailed error message if available
         errorMessage = error.detail.map(e => e.msg).join('\n');
     }
-    document.getElementById('results').textContent = errorMessage;
+    
+    // Create a Bootstrap alert div and set its content
+    const alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert', 'alert-danger');
+    alertDiv.setAttribute('role', 'alert');
+    alertDiv.textContent = errorMessage;
+    
+    // Clear previous messages and append the new one
+    const resultsElement = document.getElementById('results');
+    resultsElement.innerHTML = ''; // Clear previous content
+    resultsElement.appendChild(alertDiv); // Append the new alert div
+}
+
+function jsonToCSV(jsonData) {
+    // Define CSV headers
+    const csvHeaders = 'sequence name,site,amino acid,probability\n';
+    // Convert JSON data to CSV
+    let csvRows = jsonData.sequence_predictions.flatMap(seqPrediction => 
+        seqPrediction.site_predictions.map(site => 
+            `${seqPrediction.sequence_name},${site.site},${site.amino_acid},${site.probability.toFixed(4)}`
+        )
+    ).join('\n');
+
+    return csvHeaders + csvRows;
 }
 
 function createCSVDownloadLink(data) {
@@ -67,25 +96,11 @@ function createCSVDownloadLink(data) {
     link.href = url;
     link.download = 'predictionResults.csv'; // Suggest a filename for the download
     link.textContent = 'Download CSV Data'; // Text for the link
+    link.classList.add('btn', 'btn-success', 'mt-3', 'button-spacing'); // Adds Bootstrap button classes
 
-    // Append the link to a specific element, for example below the form
-    document.getElementById('predictionForm').appendChild(link);
+    // Append the link to the new container
+    document.getElementById('downloadButtonsContainer').appendChild(link);
 }
-
-
-function jsonToCSV(jsonData) {
-    // Define CSV headers
-    const csvHeaders = 'sequence name,site,amino acid,probability\n';
-    // Convert JSON data to CSV
-    let csvRows = jsonData.sequence_predictions.flatMap(seqPrediction => 
-        seqPrediction.site_predictions.map(site => 
-            `${seqPrediction.sequence_name},${site.site},${site.amino_acid},${site.probability.toFixed(4)}`
-        )
-    ).join('\n');
-
-    return csvHeaders + csvRows;
-}
-
 
 function createJsonDownloadLink(data) {
     const jsonString = JSON.stringify(data, null, 2); // Beautify the JSON string
@@ -104,9 +119,10 @@ function createJsonDownloadLink(data) {
     link.href = url;
     link.download = 'predictionResults.json'; // Suggest a filename for the download
     link.textContent = 'Download JSON Data'; // Text for the link
+    link.classList.add('btn', 'btn-info', 'mt-3', 'button-spacing'); // Adds Bootstrap button classes
 
-    // Append the link to a specific element, for example below the form
-    document.getElementById('predictionForm').appendChild(link);
+    // Append the link to the new container
+    document.getElementById('downloadButtonsContainer').appendChild(link);
 }
 
 function displayResultsWithHighlighting(data, threshold) {
@@ -126,12 +142,14 @@ function highlightSequence(sequence, sitePredictions, threshold) {
     sitePredictions.forEach(site => {
         if (site.probability > threshold) {
             // Wrap the character in a span with a style for highlighting
-            sequenceChars[site.site - 1] = `<span style="background-color: orange;">${sequenceChars[site.site - 1]}</span>`;
+            sequenceChars[site.site - 1] = `<span class="bg-warning">${sequenceChars[site.site - 1]}</span>`; // Uses Bootstrap's warning background color
         }
     });
     // Join the characters back into a string and return
     return sequenceChars.join('');
 }
+
+document.getElementById('loadExampleLink').addEventListener('click', loadExample);
 
 document.getElementById('threshold').addEventListener('input', function() {
     document.getElementById('thresholdValue').textContent = this.value;
