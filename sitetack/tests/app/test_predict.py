@@ -1,4 +1,4 @@
-import importlib
+import importlib.resources
 import tensorflow as tf
 import numpy as np
 from sitetack.app.alphabet import Alphabet

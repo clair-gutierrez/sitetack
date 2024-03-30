@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, validator
+from pydantic.main import BaseModel  # Updated import for BaseModel
+from pydantic.class_validators import validator  # Updated import for validator
 from enum import Enum
 from typing import List, Optional
 from sitetack.app.enums import PtmKind, OrganismKind, LabelKind, kind_to_dict

@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  sitetack:
+    build:
+      context: .
+      args:
+        - APP_PORT=${APP_PORT}
+    image: sitetack:latest
+    container_name: sitetack_app
+    ports:
+      - "${APP_PORT:-80}:${APP_PORT:-80}"
+    environment:
+      - APP_PORT=${APP_PORT:-80}
+    user: sitetack
