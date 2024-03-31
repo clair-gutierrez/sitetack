@@ -40,7 +40,8 @@ class Kmer:
                 site: The site to kmer is centered about, such as 'S' or 'T'. Must be a single character.
                 length: The length of the kmer, must be odd 
         """
-        left_padding = max(0, length // 2 - site)
+        site -= 1  # Convert to 0-indexing
+        left_padding =  max(0, length // 2 - site)
         right_padding = max(0, length // 2 + site - len(sequence) + 1)
 
         if left_padding > 0 and right_padding > 0:
@@ -54,7 +55,8 @@ class Kmer:
         elif right_padding > 0:
             subsequence = sequence[site - length // 2 :] + Kmer.padding * right_padding
         else:
-            subsequence = sequence[site - length // 2 : site + length // 2 + 1]
+            subsequence = sequence[site - length // 2:site + length // 2 + 1]
+        site += 1 # Convert back to 1-indexing
         return Kmer(site=site, subsequence=subsequence)
 
     def __len__(self):

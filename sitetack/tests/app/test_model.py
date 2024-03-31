@@ -53,17 +53,17 @@ class TestModel:
         h5_file = Model.get_h5_file(ptm, organism, label)
         alphabet = Model.get_alphabet(ptm, organism, label)
 
-        kmer_length = 53
+        kmer_length = Predict.KMER_LENGTH
         sequence_1 = "MTM"
-        site_1 = 1
+        site_1 = 2
         kmer_1 = Kmer.site_to_kmer(sequence_1, site_1, kmer_length)
 
         sequence_2 = "TMM"
-        site_2 = 0
+        site_2 = 1
         kmer_2 = Kmer.site_to_kmer(sequence_2, site_2, kmer_length)
 
         kmers = [kmer_1, kmer_2]
-        probabilities = Predict.on_kmer(kmers, alphabet, h5_file)
+        probabilities = Predict.on_kmers(kmers, alphabet, h5_file)
 
         for probability in probabilities:
             assert 0 <= probability <= 1
@@ -75,17 +75,17 @@ class TestModel:
         h5_file = Model.get_h5_file(ptm, organism, label)
         alphabet = Model.get_alphabet(ptm, organism, label)
 
-        kmer_length = 53
+        kmer_length = Predict.KMER_LENGTH
         sequence_1 = "MTM"
-        site_1 = 1
+        site_1 = 2
         kmer_1 = Kmer.site_to_kmer(sequence_1, site_1, kmer_length)
 
         sequence_2 = "TMM"
-        site_2 = 0
+        site_2 = 1
         kmer_2 = Kmer.site_to_kmer(sequence_2, site_2, kmer_length)
 
         kmers = [kmer_1, kmer_2]
-        probabilities = Predict.on_kmer(kmers, alphabet, h5_file)
+        probabilities = Predict.on_kmers(kmers, alphabet, h5_file)
 
         for probability in probabilities:
             assert 0 <= probability <= 1

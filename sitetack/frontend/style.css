@@ -1,0 +1,10 @@
+#thresholdControl {
+    display: none;
+}
+.button-spacing {
+    margin-right: 10px; /* Adjust the value as needed */
+}
+#results {
+    white-space: pre-wrap; /* Allows word wrapping */
+    word-break: break-word; /* Ensures words break to prevent overflow */
+}
