@@ -1,6 +1,6 @@
 import json
 import numpy as np
-from typing import List, Tuple
+from typing import List
 import tensorflow as tf
 from dataclasses import dataclass, asdict
 
@@ -33,18 +33,8 @@ class SequencePredictions:
 
     def to_dict(self):
        return asdict(self)
-    
-    # def to_csv(self):
-    #     """ Returns a csv representation of the object
-    #         Format: sequence_name,position,amino_acid,probability
-    #         The position is 1-indexed
-    #         The probability is rounded to 4 decimal places
-    #     """
-    #     header = "sequence_name,position,amino_acid,probability\n"
-    #     for sequence_prediction in self.sequence_predictions:
-    #         for site_prediction in sequence_prediction.site_predictions:
-    #             header += f"{sequence_prediction.sequence.sequence_name},{site_prediction.site + 1},{site_prediction.amino_acid},{site_prediction.probability:.4f}\n"
        
+
 
 
 class Predict:
@@ -54,7 +44,7 @@ class Predict:
 
     @staticmethod
     def to_one_hot(kmer: Kmer, alphabet) -> List[int]:
-      """
+        """
       Converts a kmer into a one-hot list of integers.
 
       Parameters:
@@ -64,13 +54,13 @@ class Predict:
       Returns:
       - A list of one-hot encoded integers corresponding to the input kmer
       """
-      #Creates a dict, that maps to every char of alphabet an unique int based on position
-      char_to_int = {c: i for i, c in enumerate(alphabet)}
-      return [char_to_int[char] for char in kmer.subsequence]
+        # Creates a dict, that maps to every char of alphabet an unique int based on position
+        char_to_int = {c: i for i, c in enumerate(alphabet)}
+        return [char_to_int[char] for char in kmer.subsequence]
 
     @staticmethod
     def _tensor_encoding(kmers: List[Kmer], alphabet: Alphabet) -> np.ndarray:
-      """
+        """
       Encodes a list of kmers into a np.ndarray of one-hot encoded tensors.
       
       Parameters:
@@ -79,11 +69,14 @@ class Predict:
       Returns:
       - A np.ndarray of one-hot encoded tensors
       """
-      indices = [Predict.to_one_hot(kmer, alphabet) for kmer in kmers]
-      assert all(len(one_hot) == Predict.KMER_LENGTH for one_hot in indices), "All one-hot encodings must have the correct length"
-      return np.stack(indices, axis=0)
+        indices = [Predict.to_one_hot(kmer, alphabet) for kmer in kmers]
+        assert all(
+            len(one_hot) == Predict.KMER_LENGTH for one_hot in indices
+        ), "All one-hot encodings must have the correct length"
+        return np.stack(indices, axis=0)
 
     @staticmethod
+
     def on_kmers(kmers: List[Kmer], alphabet: Alphabet, model_file) -> List[float]:
       """
       Predicts the probability that the amino acid centered in the kmer is a phosphorylation site for all kmers. 

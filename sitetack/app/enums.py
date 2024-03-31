@@ -18,22 +18,26 @@ class PtmKindMetadata:
     name: str # directory name = display name
     amino_acids: List[str]   
     description: str
-    directory_name: str =  field(default_factory=str) # directory name = display name
+    directory_name: str = field(default_factory=str)  # directory name = display name
 
     def __post_init__(self):
         if not self.directory_name:
             object.__setattr__(self, "directory_name", self.name)
 
+
 @dataclass(frozen=True)
 class OrganismKindMetadata:
     """ Describes a kind """
-    name: str 
+
+    name: str
     directory_name: str
     description: str
+
 
 @dataclass(frozen=True)
 class LabelKindMetadata:
     """ Describes a kind """
+
     name: str
     filename_query: str
     description: str
@@ -113,10 +117,12 @@ class PtmKind(Enum):
         description="Ubiquitination is the addition of a ubiquitin protein to the amino acid lysine, which is important for protein function and stability.",
     )
 
+
 class OrganismKind(Enum):
     """
     An enumeration of the different types of organisms
     """
+
     HUMAN = OrganismKindMetadata(
         name="Human",
         directory_name="Human",
@@ -128,10 +134,12 @@ class OrganismKind(Enum):
         description="Model trained on proteins from all organisms",
     )
 
+
 class LabelKind(Enum):
     """
     An enumeration of the different types of labeled data
     """
+
     NO_LABELS = LabelKindMetadata(
         name="No Labels",
         filename_query="no_labels",
@@ -142,5 +150,3 @@ class LabelKind(Enum):
         filename_query="with_labels",
         description="With labels encodes known PTM locations as a separate amino acid.",
     )
-
-

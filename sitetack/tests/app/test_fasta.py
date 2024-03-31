@@ -7,19 +7,24 @@ from sitetack.app.model import Model
 
 
 class TestFasta:
-
     @classmethod
     def setup_class(cls):
-        with importlib.resources.path('sitetack.tests.resources', 'empty.fasta') as empty_path:
+        with importlib.resources.path(
+            "sitetack.tests.resources", "empty.fasta"
+        ) as empty_path:
             cls.empty_path = Path(empty_path)
 
-        with importlib.resources.path('sitetack.tests.resources', 'one_sequence.fasta') as one_sequence_path:
+        with importlib.resources.path(
+            "sitetack.tests.resources", "one_sequence.fasta"
+        ) as one_sequence_path:
             cls.one_sequence_path = Path(one_sequence_path)
         cls.one_sequences_sequences = [
             Sequence(sequence_name="RNase_3", sequence="MVPKLFTSQICLLLLLGLMGVEGSLHARPPQFTRAQWFAIQHISLNPPRCTIAMRAINNYRWRCKNQNTFLRTTFANVVNVCGNQSIRCPHNRTLNNCHRSRFRVPLLHCDLINPGAQNISNCTYADRPGRRFYVVACDNRDPRDSPRYPVVPVHLDTTI")
         ]
 
-        with importlib.resources.path('sitetack.tests.resources', 'two_sequences.fasta') as two_sequences_path:
+        with importlib.resources.path(
+            "sitetack.tests.resources", "two_sequences.fasta"
+        ) as two_sequences_path:
             cls.two_sequences_path = Path(two_sequences_path)
         cls.two_sequences_sequences = [
             Sequence(sequence_name='RNase_1', sequence='MALEKSLVRLLLLVLILLVLGWVQPSLGKESRAKKFQRQHMDSDSSPSSSSTYCNQMMRRRNMTQGRCKPVNTFVHEPLVDVQNVCFQEKVTCKNGQGNCYKSNSSMHITDCRLTNGSRYPNCAYRTSPKERHIIVACEGSPYVPVHFDASVEDST'),

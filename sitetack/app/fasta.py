@@ -4,10 +4,9 @@ from sitetack.app.alphabet import Alphabet
 from sitetack.app.sequence import Sequence
 
 
-
 class Fasta:
     """ For reading fasta files. """
-    
+
     @staticmethod
     def read_sequences_from_file(fasta_file: Path) -> List[Sequence]:
         """

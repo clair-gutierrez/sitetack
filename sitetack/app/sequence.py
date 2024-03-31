@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from sitetack.app.kmer import Kmer
 
 
-
 @dataclass(frozen=True)
 class Sequence:
     """ Represents a sequence in a fasta file."""
@@ -36,4 +35,3 @@ class Sequence:
         """ Verify that sequence is capitalized """
         if self.sequence != self.sequence.upper():
             raise ValueError("Sequence must be capitalized")
-
