@@ -1,4 +1,3 @@
-import json
 import numpy as np
 from typing import List
 import tensorflow as tf
@@ -6,7 +5,6 @@ from dataclasses import dataclass, asdict
 
 from sitetack.app.alphabet import Alphabet
 from sitetack.app.kmer import Kmer
-from sitetack.app.sequence import Sequence
 from sitetack.app.enums import PtmKind, OrganismKind, LabelKind
 from sitetack.app.model import Model
 from sitetack.app.fasta import Fasta

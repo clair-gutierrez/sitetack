@@ -1,6 +1,4 @@
 import importlib.resources
-import tensorflow as tf
-import numpy as np
 from sitetack.app.alphabet import Alphabet
 from sitetack.app.kmer import Kmer
 from sitetack.app.predict import Predict, SitePrediction, SequencePrediction, SequencePredictions
@@ -10,7 +8,7 @@ from sitetack.app.sequence import Sequence
 from sitetack.app.model import Model
 from sitetack.app.fasta import Fasta
 
-
+class TestPredict:
 
     @classmethod
     def setup_class(cls):
@@ -31,7 +29,7 @@ from sitetack.app.fasta import Fasta
         ]
 
     def test_to_one_hot_three_characters_has_three_tensors(self):
-        alphabet_22 = Alphabet("ARNDCEQGHILKMFPSTWYVXZ-U")
+        alphabet_22  = Alphabet("ARNDCEQGHILKMFPSTWYVXZ-U")
         kmer_arn = Kmer(site=42, subsequence="ARN")
         result = Predict.to_one_hot(kmer_arn, alphabet_22)
         assert result == [0, 1, 2]

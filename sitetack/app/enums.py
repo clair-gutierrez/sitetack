@@ -1,4 +1,4 @@
-from enum import Enum, auto
+from enum import Enum
 from dataclasses import dataclass, field, asdict
 from typing import List, Type, Dict
 
