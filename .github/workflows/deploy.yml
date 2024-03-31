@@ -3,8 +3,6 @@ name: Push Docker Image to GitHub Container Registry
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 permissions:
   contents: read
