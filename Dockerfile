@@ -2,10 +2,10 @@
 FROM python:3.8-slim-buster
 
 # Define the port number as a build argument with a default value
-ARG APP_PORT=80
+ARG PORT=8100
 
 # Set the defined port number as an environment variable
-ENV APP_PORT=${APP_PORT}
+ENV PORT=${PORT}
 
 # Set working directory inside the container
 WORKDIR /sitetack
@@ -33,7 +33,7 @@ RUN chown -R sitetack:sitetack /sitetack
 USER sitetack
 
 # Set the default command to run the app using the environment variable for the port
-CMD uvicorn sitetack.app.main:app --reload --host 0.0.0.0 --port ${APP_PORT}
+CMD uvicorn sitetack.app.main:app --reload --host 0.0.0.0 --port ${PORT}
 
 # docker run -it -d -p 8100:8100 -v ${pwd}:/sitetack --name sitetack-dev python:3.8-slim-buster bash
 # uvicorn sitetack.app.main:app --reload --host 0.0.0.0 --port 8100
