@@ -39,10 +39,15 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
-        images: ${{ secrets.GCLOUD_GAR_REGION }}-docker.pkg.dev/${{ secrets.GCLOUD_PROJECT_ID }}/sitetack/sitetack
+        images: ${{ secrets.GCLOUD_GAR_REGION }}-docker.pkg.dev/${{ secrets.GCLOUD_PROJECT_ID }}/sitetack
+        flavor: |
+          latest=true
+        tags: |
+          type=sha,prefix=sha-,format=long
+          type=ref,event=tag
 
     - name: Push Docker Image to Google Artifact Registry
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v2
       with:
         context: .
         file: Dockerfile
