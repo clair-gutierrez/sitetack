@@ -31,7 +31,7 @@ jobs:
     - name: Login to Artifact Registry
       uses: docker/login-action@v3
       with:
-        registry: gcr.io
+        registry: ${{ secrets.GCLOUD_GAR_REGION }}-docker.pkg.dev
         username: oauth2accesstoken
         password: ${{ steps.auth.outputs.access_token }}
 
