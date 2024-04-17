@@ -32,6 +32,8 @@ RUN chown -R sitetack:sitetack /sitetack
 # Change to sitetack user
 USER sitetack
 
+EXPOSE ${PORT}
+
 # Set the default command to run the app using the environment variable for the port
 CMD uvicorn sitetack.app.main:app --reload --host 0.0.0.0 --port ${PORT}
 
