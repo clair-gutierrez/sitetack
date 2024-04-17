@@ -28,9 +28,9 @@ jobs:
         access_token_lifetime: 300s
 
     - name: Login to Artifact Registry
-      uses: docker/login-action@v1
+      uses: docker/login-action@v3
       with:
-        registry: ${{ secrets.GCLOUD_GAR_REGION }}-docker.pkg.dev
+        registry: gcr.io
         username: oauth2accesstoken
         password: ${{ steps.auth.outputs.access_token }}
 
