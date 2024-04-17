@@ -3,6 +3,8 @@ name: Push Docker Image to Google Artifact Registry
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 permissions:
   contents: read
@@ -47,3 +49,11 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy ${{ GCLOUD_SERVICE_NAME }} \
+          --image=${{ GCLOUD_IMAGE }}:${{ steps.meta.outputs.tags }} \
+          --region=${{ GCLOUD_GAR_REGION }} \
+          --platform=managed \
+          --allow-unauthenticated
