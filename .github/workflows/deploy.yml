@@ -26,6 +26,7 @@ jobs:
         workload_identity_provider: ${{ secrets.GCLOUD_WORKFLOW_IDENTITY_PROVIDER }}
         service_account: ${{ secrets.GCLOUD_SERVICE_ACCOUNT }}
         access_token_lifetime: 300s
+      id: auth
 
     - name: Login to Artifact Registry
       uses: docker/login-action@v3
