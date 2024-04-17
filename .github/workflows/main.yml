@@ -1,8 +1,6 @@
 name: Docker Build and Pytest
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 

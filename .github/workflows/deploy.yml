@@ -1,4 +1,4 @@
-name: Push Docker Image to GitHub Container Registry
+name: Push Docker Image to Google Artifact Registry
 
 on:
   push:
@@ -6,31 +6,41 @@ on:
 
 permissions:
   contents: read
-  packages: write
+  id-token: write  # Needed for Google authentication
 
 jobs:
-  push-to-registry:
+  push-to-gar:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
       uses: nschloe/action-cached-lfs-checkout@v1
 
-    - name: Log in to the GitHub Container Registry
+    - name: Authenticate with Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        token_format: access_token
+        project_id: ${{ secrets.GCLOUD_PROJECT_ID }}
+        workload_identity_provider: ${{ secrets.GCLOUD_WORKFLOW_IDENTITY_PROVIDER }}
+        service_account: ${{ secrets.GCLOUD_SERVICE_ACCOUNT }}
+        access_token_lifetime: 300s
+      id: auth
+
+    - name: Login to Artifact Registry
       uses: docker/login-action@v3
       with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: ${{ secrets.GCLOUD_GAR_REGION }}-docker.pkg.dev
+        username: oauth2accesstoken
+        password: ${{ steps.auth.outputs.access_token }}
 
     - name: Extract metadata (tags, labels) for Docker
       id: meta
       uses: docker/metadata-action@v4
       with:
-        images: ghcr.io/${{ github.repository_owner }}/sitetack
+        images: ${{ secrets.GCLOUD_IMAGE }}
 
-    - name: Push Docker Image to GitHub Container Registry
-      uses: docker/build-push-action@v3
+    - name: Push Docker Image to Google Artifact Registry
+      uses: docker/build-push-action@v5
       with:
         context: .
         file: Dockerfile
