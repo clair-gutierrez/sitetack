@@ -47,3 +47,11 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy ${{ secrets.GCLOUD_SERVICE_NAME }} \
+          --image=${{ secrets.GCLOUD_IMAGE }}:main \
+          --region=${{ secrets.GCLOUD_GAR_REGION }} \
+          --platform=managed \
+          --allow-unauthenticated
