@@ -2,7 +2,7 @@
 FROM python:3.8-slim-buster
 
 # Define the port number as a build argument with a default value
-ARG PORT=8100
+ARG PORT=80
 
 # Set the defined port number as an environment variable
 ENV PORT=${PORT}
@@ -21,16 +21,6 @@ RUN pip3 install poetry && \
     poetry install && \
     # cleanup downloaded python packages
     rm -rf /root/.cache/pip
-
-# Add a non-root user and switch to it
-RUN useradd -m sitetack
-
-# Give ownership of /sitetack to sitetack user
-# This ensures the user has the necessary permissions
-RUN chown -R sitetack:sitetack /sitetack
-
-# Change to sitetack user
-USER sitetack
 
 EXPOSE ${PORT}
 
