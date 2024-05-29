@@ -1,20 +1,22 @@
-# SiteTACK - Protein Sequence Analysis Tool
+# Sitetack: A Deep Learning Model that Improves PTM Prediction by Using Known PTMs
 
 ## Overview  
- Utilizing deep learning algorithms, it offers a methodical approach to analyzing protein sequences and identifying potential modification sites, including phosphorylation, glycosylation, and hydroxylation. The tool is developed with a focus on aiding scientific research, providing insights into the role of PTMs in biological functions.
+Post-translational modifications (PTMs) increase the diversity of the proteome and are vital to organismal life and therapeutic strategies. Here we have developed models that use known PTM sites in prediction via sequence-based deep learning algorithms. Specifically, PTM locations were encoded as a separate amino acid before sequences were encoded via word embedding and passed into a convolutional neural network that predicts the probability of a modification at a given site. 
 
-## Features  
-- **Comprehensive PTM Prediction**: Equipped to predict various PTM types such as phosphorylation, glycosylation, and hydroxyproline.
-- **Sequence Input Compatibility**: Accepts protein sequences in .fasta format, compatible with standard bioinformatics workflows.
-- **Probability Thresholding**: Allows setting specific probability cutoffs to enhance the precision of PTM site predictions.
-- **Advanced Encoding Techniques**: Employs one-hot encoding for efficient representation and processing of protein sequences.
-- **Integration of Deep Learning Models**: Utilizes TensorFlow-based neural network models for accurate PTM site prediction. 
+## Models
+- PTMs: Phosphorylation (S, T), Phosphorylation (Y), Glycosylation (N), Glycosylation (S, T), Ubiquitination (K), SUMOylation (K), Acetylation (K), Methylation (K), Methylation (R), Pyroglutamylation (Q), Palmitoylation (C), Hydroxylation (P), and Hydroxylation (K).
+- Kinase specific models for 68 kinases
+- N-glycosylation seqon specific models
+- O-glycosylation substype specific models for O-GalNAc, O-GlcNAc, and O-HexNAc
+- Prediction of O-GlcNAc using phosphoryaltion (S, T) sites. 
 
 
 ## Requirements 
-Docker and Docker Compose are required to run SiteTACK. See Docker's documentation for installation instructions.
+Sitetack is available as a free webtool at: sitetack.net
 
-## Installation and Setup  
+Docker and Docker Compose are required to run Sitetack docker images. See Docker's documentation for installation instructions.
+
+## Installation and Setup via Docker
 To set up SiteTACK using Docker Compose, follow these steps:  
 
 1. Clone the repository to your local machine.  
