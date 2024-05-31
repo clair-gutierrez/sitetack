@@ -66,7 +66,7 @@ class PtmKind(Enum):
         amino_acids=["N"],
         description="N-Linked glycosylation (N) is the addition of a glycan to Nδ of the amino acid asparagine.",
     )
-     O_LINKED_GLYCOSYLATION_ST = PtmKindMetadata(
+    O_LINKED_GLYCOSYLATION_ST = PtmKindMetadata(
         name="O-linked glycosylation (S,T)",
         amino_acids=["S", "T"],
         description="O-Linked glycosylation (S,T) is the addition of a glycan to Oγ of serine or threonine.",
