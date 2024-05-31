@@ -25,8 +25,8 @@ class TestEnums:
         d = kind_to_dict(PtmKind)
         print(f"d: {d}")
         assert d["HYDROXYLYSINE_K"] == {
-            "name": "Hydroxylysine (K)",
+            "name": "Hydroxylation (K)",
             "amino_acids": ["K"],
-            "description": "Hydroxylysine is a derivative of the amino acid lysine, which is used to form cross-links in collagen.",
-            'directory_name': 'Hydroxylysine (K)',
+            "description": "Hydroxylation (K) is the addition with R stereochemistry of a hydroxyl group to Cγ of the amino acid proline.",
+            'directory_name': 'Hydroxylation (K)',
         }

@@ -54,68 +54,70 @@ class PtmKind(Enum):
     PHOSPHORYLATION_ST = PtmKindMetadata(
         name="Phosphorylation (S,T)",
         amino_acids=["S", "T"],
-        description="Phosphorylation is the addition of a phosphate group to the amino acids serine and threonine, which is important for protein function and regulation.",
-    )
-    HYDROXYLYSINE_K = PtmKindMetadata(
-        name="Hydroxylysine (K)",
-        amino_acids=["K"],
-        description="Hydroxylysine is a derivative of the amino acid lysine, which is used to form cross-links in collagen.",
-    )
-    HYDROXYPROLINE_P = PtmKindMetadata(
-        name="Hydroxyproline (P)",
-        amino_acids=["P"],
-        description="Hydroxyproline is a derivative of the amino acid proline, which helps stabilize the triple helix of collagen.",
-    )
-    METHYLATION_K = PtmKindMetadata(
-        name="Methylation (K)",
-        amino_acids=["K"],
-        description="Methylation is the addition of a methyl group to the amino acid lysine, which can affect gene expression and protein function.",
-    )
-    METHYLATION_R = PtmKindMetadata(
-        name="Methylation (R)",
-        amino_acids=["R"],
-        description="Methylation is the addition of a methyl group to the amino acid arginine, which can affect gene expression and protein function.",
-    )
-    N_LINKED_GLYCOSYLATION_N = PtmKindMetadata(
-        name="N-linked glycosylation (N)",
-        amino_acids=["N"],
-        description="N-linked glycosylation is the attachment of sugar molecules to the amino acid asparagine, which is important for protein folding and stability.",
-    )
-    N6_ACETYLATION_K = PtmKindMetadata(
-        name="N6-acetylation (K)",
-        amino_acids=["K"],
-        description="N6-acetylation is the addition of an acetyl group to the amino acid lysine, which can regulate protein function and stability.",
-    )
-    O_LINKED_GLYCOSYLATION_ST = PtmKindMetadata(
-        name="O-linked glycosylation (S,T)",
-        amino_acids=["S", "T"],
-        description="O-linked glycosylation is the attachment of sugar molecules to the amino acids serine and threonine, which is important for protein folding and stability.",
+        description="Phosphorylation (S,T) is the addition of a phosphoryl group to Oγ of serine or threonine.",
     )
     PHOSPHORYLATION_Y = PtmKindMetadata(
         name="Phosphorylation (Y)",
         amino_acids=["Y"],
-        description="Phosphorylation is the addition of a phosphate group to the amino acid tyrosine, which is important for protein function and regulation.",
+        description="Phosphorylation (Y) is the addition of a phosphoryl group to Oη of tyrosine.",
+    ) 
+    N_LINKED_GLYCOSYLATION_N = PtmKindMetadata(
+        name="N-linked glycosylation (N)",
+        amino_acids=["N"],
+        description="N-Linked glycosylation (N) is the addition of a glycan to Nδ of the amino acid asparagine.",
     )
-    PYRROLIDONE_CARBOXYLIC_ACID_Q = PtmKindMetadata(
-        name="Pyrrolidone-carboxylic-acid (Q)",
-        amino_acids=["Q"],
-        description="Pyrrolidone carboxylic acid is a derivative of the amino acid glutamine, which is important for protein folding and stability.",
-    )
-    S_PALMITOYLATION_C = PtmKindMetadata(
-        name="S-Palmitoylation (C)",
-        amino_acids=["C"],
-        description="S-palmitoylation is the addition of a palmitoyl group to the amino acid cysteine, which is important for protein function and stability.",
-    )
-    SUMOYLATION_K = PtmKindMetadata(
-        name="SUMOylation (K)",
-        amino_acids=["K"],
-        description="SUMOylation is the addition of a small ubiquitin-like modifier (SUMO) to the amino acid lysine, which is important for protein function and stability.",
+    O_LINKED_GLYCOSYLATION_ST = PtmKindMetadata(
+        name="O-linked glycosylation (S,T)",
+        amino_acids=["S", "T"],
+        description="O-Linked glycosylation (S,T) is the addition of a glycan to Oγ of serine or threonine.",
     )
     UBIQUITINATION_K = PtmKindMetadata(
         name="Ubiquitination (K)",
         amino_acids=["K"],
-        description="Ubiquitination is the addition of a ubiquitin protein to the amino acid lysine, which is important for protein function and stability.",
+        description="Ubiquitination (K) is the addition of ubiquitin to Nε of lysine.",
     )
+    SUMOYLATION_K = PtmKindMetadata(
+        name="SUMOylation (K)",
+        amino_acids=["K"],
+        description="SUMOylation (K) is the addition of SUMO to Nε of lysine.",
+    )
+    N6_ACETYLATION_K = PtmKindMetadata(
+        name="Acetylation (K)",
+        amino_acids=["K"],
+        description="Acetylation (K) is the addition of an acetyl group to Nε of lysine.",
+    )
+    METHYLATION_K = PtmKindMetadata(
+        name="Methylation (K)",
+        amino_acids=["K"],
+        description="Methylation (K) is the addition of one, two, or three methyl groups to Nε of lysine.",
+    )
+    METHYLATION_R = PtmKindMetadata(
+        name="Methylation (R)",
+        amino_acids=["R"],
+        description="Methylation (R) is the addition of one or two methyl groups to the Nζ's of arginine.",
+    )
+    PYRROLIDONE_CARBOXYLIC_ACID_Q = PtmKindMetadata(
+        name="Pyroglutamylation (Q)",
+        amino_acids=["Q"],
+        description="Pyroglutamylation (Q) is the cyclization of the amino and amido groups of an N-terminal glutamine.",
+    )
+    S_PALMITOYLATION_C = PtmKindMetadata(
+        name="Palmitoylation (C)",
+        amino_acids=["C"],
+        description="Palmitoylation (C) is the addition of a palmitoyl group to Sγ of the amino acid cysteine.",
+    )
+    HYDROXYPROLINE_P = PtmKindMetadata(
+        name="Hydroxylation (P)",
+        amino_acids=["P"],
+        description="Hydroxylation (P) is the addition with R stereochemistry of a hydroxyl group to Cδ of the amino acid proline.",
+    )
+    HYDROXYLYSINE_K = PtmKindMetadata(
+        name="Hydroxylation (K)",
+        amino_acids=["K"],
+        description="Hydroxylation (K) is the addition with R stereochemistry of a hydroxyl group to Cγ of the amino acid proline.",
+    )
+     
+    
 
 
 class OrganismKind(Enum):
