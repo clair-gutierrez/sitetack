@@ -62,12 +62,12 @@ class PtmKind(Enum):
         description="Phosphorylation (Y) is the addition of a phosphoryl group to Oη of tyrosine.",
     ) 
     N_LINKED_GLYCOSYLATION_N = PtmKindMetadata(
-        name="N-linked glycosylation (N)",
+        name="N-Linked glycosylation (N)",
         amino_acids=["N"],
         description="N-Linked glycosylation (N) is the addition of a glycan to Nδ of the amino acid asparagine.",
     )
     O_LINKED_GLYCOSYLATION_ST = PtmKindMetadata(
-        name="O-linked glycosylation (S,T)",
+        name="O-Linked glycosylation (S,T)",
         amino_acids=["S", "T"],
         description="O-Linked glycosylation (S,T) is the addition of a glycan to Oγ of serine or threonine.",
     )
