@@ -14,8 +14,9 @@ Jupyter = 1.0.0
 Matplotlib = 3.8
 
 ## Datasets
-- For the datasets used in this study see the datasets folder. The specific test, train, and validation sets are not included due to size concerns, but the lists of what sites were included as positives and the reference proteome used are included so similar sets can be generated. If you want the exact sets we used please reach out. 
+- For the datasets used in this study, the data for each are in their own folder. The specific test, train, and validation sets are not included due to size concerns, but the lists of what sites were included as positives and the reference proteome used are included so similar sets can be generated. If you want the exact sets we used please reach out. 
 - Datasets are named based on the source they were obtained from
+- For human datasets the reference proteome used is: UP000005640_9606
 
 ## Build your own model
 The code was made general enought to build models on any PTM dataset. Please see instructions in the Construct_datasets_train_models notebook. 
