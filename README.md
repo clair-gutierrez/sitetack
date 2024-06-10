@@ -14,7 +14,9 @@ Post-translational modifications (PTMs) increase the diversity of the proteome a
 ## Requirements 
 Sitetack is available as a free webtool at: sitetack.net
 
-Docker and Docker Compose are required to run Sitetack docker images. See Docker's documentation for installation instructions.
+For code for dataset generation, model training, and test set analysis see the train folder along with instructions for building your own model.
+
+For the local tool, Docker and Docker Compose are required to run Sitetack docker images. See Docker's documentation for installation instructions.
 
 ## Installation and Setup via Docker
 To set up SiteTACK using Docker Compose, follow these steps:  
