@@ -7,15 +7,15 @@ Here are select datasets and code used to train models.
 
 ## Packages
 For a complete list of packages used please see the package_requirements file. We recommend setting up your environment with these packages (this should take ~5-60min to set up):
-Python >= 3.8, <3.11
-Tensorflow = 2.10.0
-Numpy = 1.26.0
-Pandas = 2.1.1
-Jupyter = 1.0.0
-Matplotlib = 3.8
-Scikit-learn = 1.3.0
-tqdm  >=4.0
-scipy >=1.11
+- Python >= 3.8, <3.11
+- Tensorflow = 2.10.0
+- Numpy = 1.26.0
+- Pandas = 2.1.1
+- Jupyter = 1.0.0
+- Matplotlib = 3.8
+- Scikit-learn = 1.3.0
+- tqdm  >=4.0
+- scipy >=1.11
 
 ## Datasets
 - For the datasets used in this study, the data for each are in their own folder. The specific test, train, and validation sets are not included due to size concerns, but the lists of what sites were included as positives and the reference proteome used are included so similar sets can be generated. If you want the exact sets we used please reach out. 
