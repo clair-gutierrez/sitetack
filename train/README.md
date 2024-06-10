@@ -21,5 +21,9 @@ Matplotlib = 3.8
 ## Build your own model
 The code was made general enought to build models on any PTM dataset. Please see instructions in the Construct_datasets_train_models notebook. 
 
+## Demo
+### In Progress
+For demo purposes they jupyter notebooks are set for and show the outputs for the generation of Ubiquitination (K) from the MusiteDeep dataset for human proteins. 
+
 ## Notes
 Dataset generation and training on a personal computer can take anywhere from seconds to a couple days and depends on dataset size and your system capabilites. 
