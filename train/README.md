@@ -6,7 +6,7 @@ Here are select datasets and code used to train models.
 - We recommend setting up an environment to ensure the necessary packages are in the correct version and don't interfere with your global python install. We used conda to do this, and evironment setup instructions can be found in the conda documentation: https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
 
 ## Packages
-For a complete list of packages used please see the package_requirements file. We recommend setting up your environment with these packages:
+For a complete list of packages used please see the package_requirements file. We recommend setting up your environment with these packages (this should take ~5-60min to set up):
 Python >= 3.8, <3.11
 Tensorflow = 2.10.0
 Numpy = 1.26.0
