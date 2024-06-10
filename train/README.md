@@ -14,7 +14,8 @@ Pandas = 2.1.1
 Jupyter = 1.0.0
 Matplotlib = 3.8
 Scikit-learn = 1.3.0
-tqdm = >=4.0
+tqdm  >=4.0
+scipy >=1.11
 
 ## Datasets
 - For the datasets used in this study, the data for each are in their own folder. The specific test, train, and validation sets are not included due to size concerns, but the lists of what sites were included as positives and the reference proteome used are included so similar sets can be generated. If you want the exact sets we used please reach out. 
