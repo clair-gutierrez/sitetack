@@ -31,9 +31,10 @@ This will create an environment with the name: sitetack-env
 ## Build your own model
 The code was made general enought to build models on any PTM dataset. Please see instructions in the Construct_datasets_train_models notebook. 
 
-## Demo
-### In Progress
+## Demo and 
 For demo purposes they jupyter notebooks are set for and show the outputs for the generation of Ubiquitination (K) from the MusiteDeep dataset for human proteins. 
+
+To recapitutalte the results of this study, the PTM name and dataset can be changed in the jupyter notebook to match the files for the other datasets. 
 
 ## Notes
 Dataset generation and training on a personal computer can take anywhere from seconds to a couple days and depends on dataset size and your system capabilites. 
