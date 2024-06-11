@@ -17,10 +17,11 @@ For a complete list of packages used please see the package_requirements file. W
 - tqdm  >=4.0
 - scipy >=1.11
 
-If you are using conda to set up an environment, you can use the provided .yml file to easily set up the correct packages:
+If you are using conda to set up an environment, you can use the provided .yml file to easily set up an envirnoment with the correct packages:
 ```
 conda env create -f sitetack_conda_env.yml
 ```
+This will create an environment with the name: sitetack-env
 
 ## Datasets
 - For the datasets used in this study, the data for each are in their own folder. The specific test, train, and validation sets are not included due to size concerns, but the lists of what sites were included as positives and the reference proteome used are included so similar sets can be generated. If you want the exact sets we used please reach out. 
