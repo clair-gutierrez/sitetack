@@ -7,7 +7,7 @@ Post-translational modifications (PTMs) increase the diversity of the proteome a
 - PTMs: Phosphorylation (S, T), Phosphorylation (Y), Glycosylation (N), Glycosylation (S, T), Ubiquitination (K), SUMOylation (K), Acetylation (K), Methylation (K), Methylation (R), Pyroglutamylation (Q), Palmitoylation (C), Hydroxylation (P), and Hydroxylation (K).
 - Kinase specific models for 68 kinases (To be added)
 - N-glycosylation seqon specific models (To be added)
-- O-glycosylation substype specific models for O-GalNAc, O-GlcNAc, and O-HexNAc (To be added)
+- O-glycosylation substype specific models for O-GalNAc, O-GlcNAc, and O-HexNAc 
 - Prediction of O-GlcNAc using phosphoryaltion (S, T) sites. (To be added)
 
 
