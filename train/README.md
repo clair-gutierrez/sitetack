@@ -36,5 +36,10 @@ For demo purposes they jupyter notebooks are set for and show the outputs for th
 
 To recapitutalte the results of this study, the PTM name and dataset can be changed in the jupyter notebook to match the files for the other datasets. 
 
+## CD-Hit removal of similar kmers
+To access CD Hit, the library pycdhit was used. As a note, this code with pycdhit will only work on Unix systems. See pycdhit documentation of installation instructions: https://pypi.org/project/py-cdhit/
+
+### CD-Hit Citations
+
 ## Notes
 Dataset generation and training on a personal computer can take anywhere from seconds to a couple days and depends on dataset size and your system capabilites. 
