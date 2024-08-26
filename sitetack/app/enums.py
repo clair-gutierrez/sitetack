@@ -150,5 +150,5 @@ class LabelKind(Enum):
     WITH_LABELS = LabelKindMetadata(
         name="With Labels",
         filename_query="with_labels",
-        description="With labels encodes known PTM locations as a separate amino acid.",
+        description="With labels encodes known PTM locations as a separate amino acid. Previously known PTM locations can be encoded with the @ symbol (and/or the & symbol for models with a second amino acid that can be post-translationally modified) in submission sequences",
     )
