@@ -5,6 +5,7 @@ from sitetack.app.enums import PtmKind, OrganismKind, LabelKind, kind_to_dict
 from sitetack.app.fasta import Fasta
 from sitetack.app.model import Model
 from sitetack.app.predict import Predict
+from sitetack.app import pyrophos
 from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
 
@@ -59,6 +60,9 @@ app = FastAPI()
 
 with importlib.resources.path('sitetack.frontend', '') as frontend_path:
     app.mount("/frontend", StaticFiles(directory=str(frontend_path)), name="frontend")
+
+# Hidden, unlisted pyrophosphorylation page (served under an unguessable path).
+pyrophos.register(app)
 
 @app.post("/submit/")
 async def submit_data(request: RequestModel):
