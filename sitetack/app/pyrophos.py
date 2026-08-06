@@ -140,14 +140,83 @@ class PyrophosModelKind(Enum):
     )
 
 
+# ---------------------------------------------------------------------------
+# Motif cohorts.
+#
+# Each label variant above ships three models: one trained on every curated site
+# ("general"), one on sites matching the CK2 consensus, and one on the rest. A
+# submission is scored by all three so the tracks can be compared directly --
+# see COHORTS below for what each is good for.
+#
+# Cohort files are the label variant's filename with a "__<cohort>" suffix; the
+# general model keeps the original bare name.
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class CohortMetadata:
+    """One of the three models run for every submission."""
+
+    key: str           # identifier used in the JSON response
+    name: str          # column heading in the UI
+    description: str
+    suffix: str        # appended to the label variant's filename stem
+
+
+class CohortKind(Enum):
+    GENERAL = CohortMetadata(
+        key="general",
+        name="General",
+        description="Trained on every curated pyrophosphorylation site.",
+        suffix="",
+    )
+    CK2 = CohortMetadata(
+        key="ck2",
+        name="CK2 motif",
+        description=(
+            "Trained only on sites whose +3 residue is E/D/S/T, against "
+            "negatives from the same motif class."
+        ),
+        suffix="__ck2",
+    )
+    OTHER = CohortMetadata(
+        key="other",
+        name="Non-CK2",
+        description=(
+            "Trained only on sites that do not match the CK2 +3 motif. Built "
+            "from 101 sites, so it is the least reliable of the three."
+        ),
+        suffix="__other",
+    )
+
+
+#: Residues at +3 that make a site CK2-like, including the label forms of S/T.
+#: Mirrors pyrophos.motif.CK2_PLUS3_RESIDUES in the training repo.
+CK2_PLUS3_RESIDUES = frozenset({"E", "D", "S", "T", "@", "&", "$", "%"})
+PLUS3_OFFSET = 3
+
+
+def is_ck2_motif(sequence: str, site: int) -> bool:
+    """Whether the 1-based ``site`` matches the CK2 +3 consensus.
+
+    A site whose +3 runs past the C-terminus is not CK2-like: there is no
+    residue to satisfy the motif.
+    """
+    index = site - 1 + PLUS3_OFFSET
+    return 0 <= index < len(sequence) and sequence[index] in CK2_PLUS3_RESIDUES
+
+
 def pyrophos_models_directory() -> Path:
     """Directory that holds the four pyrophosphorylation .h5 model files."""
     return Model.get_directory_from_module("sitetack.models_pyrophos")
 
 
-def get_h5_file(model: PyrophosModelKind) -> Path:
-    """Resolve the .h5 file for a pyrophosphorylation model."""
-    path = pyrophos_models_directory() / model.value.h5_filename
+def get_h5_file(
+    model: PyrophosModelKind, cohort: CohortKind = CohortKind.GENERAL
+) -> Path:
+    """Resolve the .h5 file for a (label variant, cohort) pair."""
+    stem = model.value.h5_filename[: -len(".h5")]
+    path = pyrophos_models_directory() / f"{stem}{cohort.value.suffix}.h5"
     if not path.exists():
         raise FileNotFoundError(
             f"Pyrophosphorylation model file not found: {path}. "
@@ -162,14 +231,18 @@ def get_alphabet(model: PyrophosModelKind) -> Alphabet:
     return Alphabet(str=model.value.alphabet)
 
 
-def predict_on_fasta(fasta_text: str, model: PyrophosModelKind) -> SequencePredictions:
+def predict_on_fasta(
+    fasta_text: str,
+    model: PyrophosModelKind,
+    cohort: CohortKind = CohortKind.GENERAL,
+) -> SequencePredictions:
     """
     Predict pyrophosphorylation probabilities for every target site in the fasta
     text. Mirrors ``Predict.on_fasta`` but uses the pyrophos model configuration.
     """
     meta = model.value
     alphabet = get_alphabet(model)
-    h5_file = get_h5_file(model)
+    h5_file = get_h5_file(model, cohort)
     sequences = Fasta.read_sequences_from_text(fasta_text)
 
     sequence_predictions = []
@@ -190,14 +263,93 @@ def predict_on_fasta(fasta_text: str, model: PyrophosModelKind) -> SequencePredi
     return SequencePredictions(sequence_predictions)
 
 
+def predict_all_cohorts(fasta_text: str, model: PyrophosModelKind) -> Dict:
+    """Score a submission with all three cohort models and merge the results.
+
+    Returns one entry per sequence, each carrying every target site once with a
+    score from each cohort plus the site's CK2 motif call:
+
+        {"sequences": [
+            {"sequence_name": ..., "sequence": ...,
+             "sites": [{"site": 12, "amino_acid": "S", "is_ck2_motif": true,
+                        "scores": {"general": 0.8, "ck2": 0.9, "other": 0.3},
+                        "routed": 0.9}, ...]}]}
+
+    ``routed`` is the score from the cohort matching the site's own motif class
+    -- the CK2 model for CK2-motif sites, the non-CK2 model otherwise. It is a
+    convenience: every underlying score is present, so the caller can aggregate
+    differently without re-submitting.
+    """
+    by_cohort = {
+        cohort.value.key: predict_on_fasta(fasta_text, model, cohort) for cohort in CohortKind
+    }
+
+    general = by_cohort[CohortKind.GENERAL.value.key]
+    sequences = []
+    for index, sequence_prediction in enumerate(general.sequence_predictions):
+        sequence = sequence_prediction.sequence
+        sites = []
+        for site_index, site_prediction in enumerate(sequence_prediction.site_predictions):
+            scores = {
+                key: predictions.sequence_predictions[index]
+                .site_predictions[site_index]
+                .probability
+                for key, predictions in by_cohort.items()
+            }
+            ck2_motif = is_ck2_motif(sequence, site_prediction.site)
+            sites.append(
+                {
+                    "site": site_prediction.site,
+                    "amino_acid": site_prediction.amino_acid,
+                    "is_ck2_motif": ck2_motif,
+                    "scores": scores,
+                    "routed": scores[
+                        CohortKind.CK2.value.key if ck2_motif else CohortKind.OTHER.value.key
+                    ],
+                }
+            )
+        sites.sort(key=lambda entry: entry["site"])
+        sequences.append(
+            {
+                "sequence_name": sequence_prediction.sequence_name,
+                "sequence": sequence,
+                "sites": sites,
+            }
+        )
+
+    return {
+        "cohorts": [
+            {
+                "key": cohort.value.key,
+                "name": cohort.value.name,
+                "description": cohort.value.description,
+            }
+            for cohort in CohortKind
+        ],
+        "sequences": sequences,
+    }
+
+
 def models_to_dict() -> Dict[str, Dict]:
-    """Serialize the four models for the frontend dropdown."""
+    """Serialize the four label variants for the frontend dropdown."""
     d: Dict[str, Dict] = {}
     for kind in PyrophosModelKind:
         value = asdict(kind.value)
         # The frontend only needs display fields; drop server-side internals.
         d[kind.name] = {"name": value["name"], "description": value["description"]}
     return d
+
+
+def cohorts_to_dict() -> List[Dict]:
+    """Serialize the three cohort models for the frontend legend."""
+    return [
+        {
+            "key": cohort.value.key,
+            "name": cohort.value.name,
+            "description": cohort.value.description,
+        }
+        for cohort in CohortKind
+    ]
 
 
 # ---------------------------------------------------------------------------
@@ -234,13 +386,12 @@ async def _get_form():
 
 
 async def _get_models():
-    return models_to_dict()
+    return {"models": models_to_dict(), "cohorts": cohorts_to_dict()}
 
 
 async def _submit_data(request: PyrophosRequest):
     model = PyrophosModelKind[request.model]
-    sequence_predictions = predict_on_fasta(request.text, model)
-    return sequence_predictions.to_dict()
+    return predict_all_cohorts(request.text, model)
 
 
 def register(app: FastAPI) -> None:

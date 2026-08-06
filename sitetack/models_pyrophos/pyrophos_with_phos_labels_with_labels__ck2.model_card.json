@@ -1,0 +1,95 @@
+{
+  "spec": "both",
+  "cohort": "ck2",
+  "sitetack_display_name": "With both",
+  "sitetack_filename": "pyrophos_with_phos_labels_with_labels__ck2.h5",
+  "contract": {
+    "alphabet": "ARNDCEQGHILKMFPSTWYV@&$%-UX",
+    "kmer_length": 53,
+    "target_residues": [
+      "S",
+      "T"
+    ],
+    "input_shape": [
+      "batch",
+      53
+    ],
+    "input_dtype": "int32 embedding indices from enumerate(alphabet)",
+    "output_shape": [
+      "batch",
+      1
+    ],
+    "embedding_input_dim": 256,
+    "embedding_output_dim": 21
+  },
+  "labels_encoded": {
+    "phosphorylation": true,
+    "pyrophosphorylation": true
+  },
+  "training": {
+    "trial": 7,
+    "seed": 7,
+    "epochs_run": 14,
+    "git_revision": "afc9271f5fc443ad5e8982f9c09c1b20b856ab8b"
+  },
+  "metrics": {
+    "validation": {
+      "auc": 1.0,
+      "auprc": 1.0,
+      "accuracy": 0.975609756097561,
+      "recall": 0.9375,
+      "precision": 1.0,
+      "specificity": 1.0,
+      "mcc": 0.9494431566409375,
+      "f1": 0.967741935483871,
+      "n": 41,
+      "n_positive": 16
+    },
+    "test": {
+      "auc": 0.9568181818181818,
+      "auprc": 0.9633918495297806,
+      "accuracy": 0.8333333333333334,
+      "recall": 0.85,
+      "precision": 0.8095238095238095,
+      "specificity": 0.8181818181818182,
+      "mcc": 0.6674238124719146,
+      "f1": 0.8292682926829268,
+      "n": 42,
+      "n_positive": 20
+    },
+    "across_trials": {
+      "auc": {
+        "mean": 0.9626921057584672,
+        "std": 0.024863269836111524
+      },
+      "auprc": {
+        "mean": 0.965406090449403,
+        "std": 0.025637128741585608
+      },
+      "accuracy": {
+        "mean": 0.8560975609756097,
+        "std": 0.08122354051388639
+      },
+      "recall": {
+        "mean": 0.8105206321138814,
+        "std": 0.16912557194977756
+      },
+      "precision": {
+        "mean": 0.9121315971087138,
+        "std": 0.0864858897511093
+      },
+      "specificity": {
+        "mean": 0.9081711855396065,
+        "std": 0.09058456131459595
+      },
+      "mcc": {
+        "mean": 0.732171130717517,
+        "std": 0.13188651077666058
+      },
+      "f1": {
+        "mean": 0.8405755986912556,
+        "std": 0.12187190664283293
+      }
+    }
+  }
+}

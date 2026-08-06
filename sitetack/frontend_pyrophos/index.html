@@ -18,15 +18,23 @@
             in development. Please don't share this URL beyond the collaborators it was given to.
         </div>
         <h2 class="mb-4">Pyrophosphorylation Site Prediction</h2>
+
         <form id="predictionForm">
             <div class="form-group">
-                <label for="model">Model:</label>
+                <label for="model">Label variant:</label>
                 <select name="model" id="model" class="form-control">
                     <!-- Dynamically added model options will appear here -->
                 </select>
                 <div id="model_description" class="form-text">
                     <!-- Description will be displayed here -->
                 </div>
+            </div>
+
+            <div class="alert alert-info py-2" role="alert">
+                Every submission is scored by <strong>three models</strong> of the selected
+                label variant &mdash; general, CK2-motif and non-CK2 &mdash; so you can see
+                how the motif split changes each site.
+                <div id="cohortLegend" class="mt-2 small"></div>
             </div>
 
             <div class="form-group">
@@ -42,13 +50,30 @@
 
         <div id="downloadButtonsContainer" class="d-inline-block "></div>
 
-        <div id="thresholdControl" class="mt-3">
-            <label for="threshold">Highlighting Threshold: <span id="thresholdValue">0.5</span></label>
-            <input type="range" id="threshold" name="threshold" class="custom-range" min="0" max="1" step="0.01" value="0.5">
-
+        <div id="viewControls" class="mt-3" style="display: none;">
+            <div class="form-row align-items-end">
+                <div class="col-md-5">
+                    <label for="threshold">Highlighting Threshold: <span id="thresholdValue">0.5</span></label>
+                    <input type="range" id="threshold" name="threshold" class="custom-range" min="0" max="1" step="0.01" value="0.5">
+                </div>
+                <div class="col-md-4">
+                    <label for="highlightCohort">Highlight sequence using:</label>
+                    <select id="highlightCohort" class="form-control form-control-sm">
+                        <option value="general">General</option>
+                        <option value="ck2">CK2 motif</option>
+                        <option value="other">Non-CK2</option>
+                        <option value="routed">Routed (per-site motif)</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
+        <div id="charts" class="mt-4"></div>
+
         <pre id="results"></pre>
+
+        <div id="tables" class="mt-4"></div>
+
         <h4>Reference</h4>
         <p>Gutierrez, C. S.; Kassim, A. A.; Gutierrez, B. D.; Raines, R. T. Sitetack: A deep learning model that improves PTM prediction by using known PTMs. 2024. Bioinformatics, 40(11) btae602, https://doi.org/10.1093/bioinformatics/btae602 .</p>
 

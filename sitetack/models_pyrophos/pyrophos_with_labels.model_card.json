@@ -1,0 +1,95 @@
+{
+  "spec": "pyrophos_labels",
+  "cohort": "all",
+  "sitetack_display_name": "With pyrophos labels",
+  "sitetack_filename": "pyrophos_with_labels.h5",
+  "contract": {
+    "alphabet": "ARNDCEQGHILKMFPSTWYV@&$%-UX",
+    "kmer_length": 53,
+    "target_residues": [
+      "S",
+      "T"
+    ],
+    "input_shape": [
+      "batch",
+      53
+    ],
+    "input_dtype": "int32 embedding indices from enumerate(alphabet)",
+    "output_shape": [
+      "batch",
+      1
+    ],
+    "embedding_input_dim": 256,
+    "embedding_output_dim": 21
+  },
+  "labels_encoded": {
+    "phosphorylation": false,
+    "pyrophosphorylation": true
+  },
+  "training": {
+    "trial": 3,
+    "seed": 3,
+    "epochs_run": 12,
+    "git_revision": "afc9271f5fc443ad5e8982f9c09c1b20b856ab8b"
+  },
+  "metrics": {
+    "validation": {
+      "auc": 0.9664502164502164,
+      "auprc": 0.9651090346898188,
+      "accuracy": 0.8360655737704918,
+      "recall": 1.0,
+      "precision": 0.7368421052631579,
+      "specificity": 0.696969696969697,
+      "mcc": 0.716628647780548,
+      "f1": 0.8484848484848485,
+      "n": 61,
+      "n_positive": 28
+    },
+    "test": {
+      "auc": 0.8782961460446247,
+      "auprc": 0.8932828367930823,
+      "accuracy": 0.7142857142857143,
+      "recall": 0.8275862068965517,
+      "precision": 0.6486486486486487,
+      "specificity": 0.6176470588235294,
+      "mcc": 0.45075289713268507,
+      "f1": 0.7272727272727273,
+      "n": 63,
+      "n_positive": 29
+    },
+    "across_trials": {
+      "auc": {
+        "mean": 0.9224077953253428,
+        "std": 0.031843216932396924
+      },
+      "auprc": {
+        "mean": 0.9343570802552279,
+        "std": 0.03308363389623646
+      },
+      "accuracy": {
+        "mean": 0.839344262295082,
+        "std": 0.039344262295081964
+      },
+      "recall": {
+        "mean": 0.842665393087807,
+        "std": 0.0919930460684745
+      },
+      "precision": {
+        "mean": 0.84386982842467,
+        "std": 0.0783181036914441
+      },
+      "specificity": {
+        "mean": 0.839416190347781,
+        "std": 0.08852533194528184
+      },
+      "mcc": {
+        "mean": 0.687951789263429,
+        "std": 0.07552201802820173
+      },
+      "f1": {
+        "mean": 0.8364732997170006,
+        "std": 0.043745911310908325
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "spec": "both",
+  "cohort": "other",
+  "sitetack_display_name": "With both",
+  "sitetack_filename": "pyrophos_with_phos_labels_with_labels__other.h5",
+  "contract": {
+    "alphabet": "ARNDCEQGHILKMFPSTWYV@&$%-UX",
+    "kmer_length": 53,
+    "target_residues": [
+      "S",
+      "T"
+    ],
+    "input_shape": [
+      "batch",
+      53
+    ],
+    "input_dtype": "int32 embedding indices from enumerate(alphabet)",
+    "output_shape": [
+      "batch",
+      1
+    ],
+    "embedding_input_dim": 256,
+    "embedding_output_dim": 21
+  },
+  "labels_encoded": {
+    "phosphorylation": true,
+    "pyrophosphorylation": true
+  },
+  "training": {
+    "trial": 5,
+    "seed": 5,
+    "epochs_run": 22,
+    "git_revision": "afc9271f5fc443ad5e8982f9c09c1b20b856ab8b"
+  },
+  "metrics": {
+    "validation": {
+      "auc": 0.9800000000000001,
+      "auprc": 0.9833333333333333,
+      "accuracy": 0.75,
+      "recall": 0.5,
+      "precision": 1.0,
+      "specificity": 1.0,
+      "mcc": 0.5773502691896257,
+      "f1": 0.6666666666666666,
+      "n": 20,
+      "n_positive": 10
+    },
+    "test": {
+      "auc": 0.5961538461538461,
+      "auprc": 0.6040293040293041,
+      "accuracy": 0.6666666666666666,
+      "recall": 0.375,
+      "precision": 0.6,
+      "specificity": 0.8461538461538461,
+      "mcc": 0.25215418055077093,
+      "f1": 0.46153846153846156,
+      "n": 21,
+      "n_positive": 8
+    },
+    "across_trials": {
+      "auc": {
+        "mean": 0.835660533910534,
+        "std": 0.14814585409976078
+      },
+      "auprc": {
+        "mean": 0.8646130833432426,
+        "std": 0.10418157225137978
+      },
+      "accuracy": {
+        "mean": 0.55,
+        "std": 0.10488088481701514
+      },
+      "recall": {
+        "mean": 0.6954545454545455,
+        "std": 0.39419863265043303
+      },
+      "precision": {
+        "mean": 0.6026315789473684,
+        "std": 0.280242771682576
+      },
+      "specificity": {
+        "mean": 0.3988888888888889,
+        "std": 0.47000000000000003
+      },
+      "mcc": {
+        "mean": 0.13044097688128398,
+        "std": 0.18521709233094202
+      },
+      "f1": {
+        "mean": 0.5507252066566337,
+        "std": 0.24917062703924617
+      }
+    }
+  }
+}
