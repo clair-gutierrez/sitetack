@@ -92,15 +92,37 @@ class TestPyrophosPage:
         response = client.get(f"{PYROPHOS_PREFIX}/models")
         assert response.status_code == 200
         data = response.json()
-        assert set(data["models"].keys()) == set(MODEL_NAMES)
-        for value in data["models"].values():
+        assert set(data.keys()) == set(MODEL_NAMES)
+        for value in data.values():
             assert "name" in value
             assert "description" in value
 
-    def test_models_endpoint_lists_cohorts(self):
+    def test_models_endpoint_is_a_bare_mapping(self):
+        """Regression: /models must stay the flat {NAME: {...}} mapping.
+
+        The frontend builds the dropdown by iterating this response's top-level
+        keys. Wrapping it in an envelope (or adding any sibling key) means a
+        browser holding a cached older script.js fills the dropdown with the
+        envelope's keys and posts one of them as the model name, which the
+        server rejects as "Invalid pyrophosphorylation model". Cohorts live at
+        /cohorts precisely so this response can stay stable.
+        """
         data = client.get(f"{PYROPHOS_PREFIX}/models").json()
-        assert [c["key"] for c in data["cohorts"]] == COHORT_KEYS
-        for cohort in data["cohorts"]:
+        assert set(data.keys()) == set(MODEL_NAMES)
+        # Every top-level key must itself be a valid model name to POST back.
+        for key in data:
+            response = client.post(
+                f"{PYROPHOS_PREFIX}/submit/",
+                json={"model": key, "text": ">m\nSTAAS"},
+            )
+            assert response.status_code == 200, f"/models key {key!r} is not submittable"
+
+    def test_cohorts_endpoint(self):
+        response = client.get(f"{PYROPHOS_PREFIX}/cohorts")
+        assert response.status_code == 200
+        cohorts = response.json()
+        assert [c["key"] for c in cohorts] == COHORT_KEYS
+        for cohort in cohorts:
             assert cohort["name"]
             assert cohort["description"]
 

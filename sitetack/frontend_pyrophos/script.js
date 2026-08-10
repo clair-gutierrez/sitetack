@@ -417,16 +417,33 @@ function drawTables(data, threshold) {
 // Wiring
 // ---------------------------------------------------------------------------
 
-document.getElementById('loadExampleLink').addEventListener('click', loadExample);
+// Bind defensively. These run at parse time, and a browser holding a cached
+// copy of an older index.html will be missing some of these ids -- an
+// unguarded null here throws and aborts the rest of the file, including the
+// DOMContentLoaded handler that fills the model dropdown. Losing one control is
+// recoverable; losing the dropdown makes the page unusable.
+function on(id, event, handler) {
+    var node = document.getElementById(id);
+    if (node) {
+        node.addEventListener(event, handler);
+    } else {
+        console.warn('pyrophos: missing element #' + id + ' (stale cached page?)');
+    }
+}
 
-document.getElementById('threshold').addEventListener('input', function() {
-    document.getElementById('thresholdValue').textContent = this.value;
+on('loadExampleLink', 'click', loadExample);
+
+on('threshold', 'input', function () {
+    var readout = document.getElementById('thresholdValue');
+    if (readout) {
+        readout.textContent = this.value;
+    }
     if (window.originalData) {
         renderAll(window.originalData);
     }
 });
 
-document.getElementById('highlightCohort').addEventListener('change', function () {
+on('highlightCohort', 'change', function () {
     if (window.originalData) {
         renderAll(window.originalData);
     }
@@ -444,10 +461,13 @@ document.addEventListener('DOMContentLoaded', function () {
         descriptionElement.textContent = selected ? selected.description : '';
     }
 
+    // /models is the bare {NAME: {...}} mapping it has always been. Cohorts come
+    // from their own endpoint rather than as a sibling key, so that a browser
+    // holding an older cached copy of this file still builds a working dropdown.
     fetch('models')
         .then(response => response.json())
         .then(data => {
-            modelData = data.models || data;
+            modelData = data;
             for (const key in modelData) {
                 if (modelData.hasOwnProperty(key)) {
                     const option = document.createElement('option');
@@ -457,18 +477,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
             updateDescription();
-
-            const legend = document.getElementById('cohortLegend');
-            if (data.cohorts && legend) {
-                legend.innerHTML = data.cohorts.map(function (cohort) {
-                    return '<div><span style="display:inline-block;width:10px;height:10px;' +
-                        'background:' + (COHORT_COLOURS[cohort.key] || '#666') + ';"></span> ' +
-                        '<strong>' + cohort.name + '</strong> &mdash; ' + cohort.description +
-                        '</div>';
-                }).join('');
-            }
         })
         .catch(error => console.error('Error fetching models:', error));
+
+    // The legend is decoration; a failure here must not take the form with it.
+    fetch('cohorts')
+        .then(response => response.json())
+        .then(cohorts => {
+            const legend = document.getElementById('cohortLegend');
+            if (!legend || !Array.isArray(cohorts)) {
+                return;
+            }
+            legend.innerHTML = cohorts.map(function (cohort) {
+                return '<div><span style="display:inline-block;width:10px;height:10px;' +
+                    'background:' + (COHORT_COLOURS[cohort.key] || '#666') + ';"></span> ' +
+                    '<strong>' + cohort.name + '</strong> &mdash; ' + cohort.description +
+                    '</div>';
+            }).join('');
+        })
+        .catch(error => console.error('Error fetching cohorts:', error));
 
     selectElement.addEventListener('change', updateDescription);
 });

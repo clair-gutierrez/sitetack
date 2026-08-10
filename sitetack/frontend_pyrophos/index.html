@@ -9,7 +9,7 @@
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS. Relative path resolves under the page's unguessable prefix. -->
-    <link rel="stylesheet" href="frontend/style.css">
+    <link rel="stylesheet" href="frontend/style.css?v=2">
 </head>
 <body class="bg-light">
     <div class="container py-5">
@@ -84,6 +84,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- link script.js (relative path resolves under the page's unguessable prefix) -->
-    <script src="frontend/script.js"></script>
+    <!-- ?v= busts browser caches when this file changes; bump it on every
+         frontend edit, or returning users keep running the old script. -->
+    <script src="frontend/script.js?v=2"></script>
 </body>
 </html>

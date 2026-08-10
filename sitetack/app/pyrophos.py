@@ -386,7 +386,17 @@ async def _get_form():
 
 
 async def _get_models():
-    return {"models": models_to_dict(), "cohorts": cohorts_to_dict()}
+    # Deliberately the bare {NAME: {...}} mapping, NOT wrapped in a envelope.
+    # A cached copy of an older script.js iterates this response's top-level
+    # keys to build the dropdown, so adding a sibling key here silently breaks
+    # every browser holding that cache: the dropdown fills with the envelope's
+    # own keys and submitting posts "models" as the model name. Cohorts are
+    # served separately by _get_cohorts for exactly this reason.
+    return models_to_dict()
+
+
+async def _get_cohorts():
+    return cohorts_to_dict()
 
 
 async def _submit_data(request: PyrophosRequest):
@@ -413,4 +423,5 @@ def register(app: FastAPI) -> None:
 
     app.add_api_route(f"{PYROPHOS_PREFIX}/", _get_form, methods=["GET"])
     app.add_api_route(f"{PYROPHOS_PREFIX}/models", _get_models, methods=["GET"])
+    app.add_api_route(f"{PYROPHOS_PREFIX}/cohorts", _get_cohorts, methods=["GET"])
     app.add_api_route(f"{PYROPHOS_PREFIX}/submit/", _submit_data, methods=["POST"])
