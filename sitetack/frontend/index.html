@@ -7,7 +7,7 @@
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Optional: include a custom CSS file to further customize your site -->
-    <link rel="stylesheet" href="/frontend/style.css">
+    <link rel="stylesheet" href="/frontend/style.css?v=1">
 </head>
 <body class="bg-light">
     <div class="container py-5">
@@ -20,6 +20,9 @@
                 </select>
                 <div id="ptm_description" class="form-text">
                     <!-- Description will be displayed here -->
+                </div>
+                <div id="ptm_structures" class="ptm-structures">
+                    <!-- Chemical structures for the selected PTM appear here -->
                 </div>
             </div>
             
@@ -68,11 +71,30 @@
 
     </div>
 
+    <!-- Enlarged view of a structure; populated by script.js when a thumbnail is clicked. -->
+    <div class="modal fade" id="ptmStructureModal" tabindex="-1" role="dialog"
+         aria-labelledby="ptmStructureModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ptmStructureModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="ptmStructureModalImage" src="" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Include Bootstrap JS and its dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- link script.js -->
-    <script src="/frontend/script.js"></script>
+    <!-- link script.js. ?v= busts browser caches when these files change;
+         bump it on every frontend edit, or returning users keep the old script. -->
+    <script src="/frontend/script.js?v=1"></script>
 </body>
 </html>

@@ -8,3 +8,42 @@
     white-space: pre-wrap; /* Allows word wrapping */
     word-break: break-word; /* Ensures words break to prevent overflow */
 }
+
+/* Chemical structures shown under the PTM dropdown. Populated by
+   renderPtmStructures() in script.js; a PTM may have several structures. */
+.ptm-structures {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+.ptm-structure {
+    margin: 0;
+    text-align: center;
+}
+.ptm-structure img {
+    display: block;
+    height: 160px;
+    width: auto;
+    max-width: 100%;
+    /* The figures have white backgrounds and the page is bg-light, so frame each
+       one as a white card to keep it from bleeding into the page. */
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    cursor: zoom-in;
+}
+.ptm-structure figcaption {
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Keep the enlarged structure inside the viewport. Bootstrap's .img-fluid caps
+   width but not height, so a tall figure would otherwise scroll the modal. */
+#ptmStructureModalImage {
+    width: auto;
+    max-height: 70vh;
+}
